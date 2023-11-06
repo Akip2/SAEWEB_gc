@@ -1,52 +1,58 @@
-CREATE TABLE Article ( id_article INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-						titre VARCHAR(500),
-						resume VARCHAR(500),
-						typearticle VARCHAR(500));
+Create Table utilisateur (
+id INT(3) NOT NULL AUTO_INCREMENT,
+nom varchar(20), 
+prenom varchar(20),
+mail varchar(40),
+motdepasse varchar(20),
+role int(2),
+Constraint primary key(id)
+);
 
-CREATE TABLE Chercheur ( id_chercheur INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-							email VARCHAR(500),
-							nomchercheur VARCHAR(500),
-							prenomchercheur VARCHAR(500),
-							urlchercheur VARCHAR(500));
+Create Table touite(
+id INT(4) NOT NULL AUTO_INCREMENT ,
+text varchar(235),
+image varchar(60),
+id_auteur int(3) NOT NULL,
+note int(3),
+datePubli date,
+Constraint primary key(id),
+foreign key(id_auteur) references utilisateur(id)
+);
 
-CREATE TABLE Laboratoire ( id_labo INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-							nomlabo VARCHAR(500),
-							siglelabo VARCHAR(500),
-							adresselabo VARCHAR(200),
-							urllabo VARCHAR(500));
+Create Table image(
+id INT(3) NOT NULL AUTO_INCREMENT,
+descImage varchar(500),
+chemin varchar(60), 
+Constraint primary key(id)
+);
 
-CREATE TABLE Support ( nomsupport VARCHAR(500) PRIMARY KEY NOT NULL,
-						typesupport VARCHAR(500));
+Create Table tag(
+id INT(3) NOT NULL AUTO_INCREMENT, 
+libelle varchar(30),
+descTag varchar(50),
+Constraint primary key(id)
+);
 
-CREATE TABLE Ecrire ( id_chercheur INT,
-						id_article INT,
-						PRIMARY KEY (id_chercheur, id_article),
-						FOREIGN KEY (id_chercheur) REFERENCES Chercheur (id_chercheur),
-						FOREIGN KEY (id_article) REFERENCES Article (id_article));
+Create Table touite2tag(
+id_touite int(3) not null,
+id_tag int(3) not null,
+Constraint primary key(id_touite,id_tag),
+foreign key(id_touite) references touite(id),
+foreign key(id_tag) references tag(id)
+);
 
-CREATE TABLE Publier ( id_article INT,
-						nomsupport VARCHAR(500),
-						annee_publication INT,
-						PRIMARY KEY (id_article, nomsupport),
-						FOREIGN KEY (id_article) REFERENCES Article(id_article),
-						FOREIGN KEY (nomsupport) REFERENCES Support(nomsupport));
+Create Table abonnement(
+id_suiveur int(3) not null,
+id_suivit int(3) not null,
+Constraint primary key(id_suiveur,id_suivit),
+foreign key(id_suiveur) references utilisateur(id),
+foreign key(id_suivit) references utilisateur(id)
+);
 
-CREATE TABLE Travailler ( id_chercheur INT,
-							id_labo INT,
-							PRIMARY KEY (id_chercheur, id_labo),
-							FOREIGN KEY (id_chercheur) REFERENCES Chercheur(id_chercheur),
-							FOREIGN KEY (id_labo) REFERENCES Laboratoire(id_labo));
-
-CREATE TABLE Annoter ( id_annotation INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-						id_chercheur INT,
-						id_article INT,
-						libelle VARCHAR(500),
-						FOREIGN KEY (id_chercheur) REFERENCES Chercheur(id_chercheur),
-						FOREIGN KEY (id_article) REFERENCES Article(id_article));
-
-CREATE TABLE Noter ( id_chercheur INT,
-						id_article INT,
-						note INT,
-						PRIMARY KEY (id_chercheur, id_article),
-						FOREIGN KEY (id_chercheur) REFERENCES Chercheur(id_chercheur),
-						FOREIGN KEY (id_article) REFERENCES Article(id_article));
+Create Table suivre(
+id_suiveur int(3) not null,
+id_tag int(3) not null,
+Constraint primary key(id_suiveur,id_tag),
+foreign key(id_suiveur) references utilisateur(id),
+foreign key(id_tag) references tag(id)
+);
