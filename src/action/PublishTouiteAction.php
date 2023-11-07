@@ -30,6 +30,7 @@ class PublishTouiteAction extends Action {
             
             $touite; //Initialisation du touite
 
+            $dest=null;
             if(isset($_POST["image"])){
                 $tmp=$_FILES["image"]["tmp_name"];
 
@@ -37,17 +38,10 @@ class PublishTouiteAction extends Action {
                 
                 $dest=__DIR__."/../../img/$filename.png"; //Stockage de l'image côté serveur
 
-                $touite=new Touite\Touite($texte, $date_publication, $dest);
             }
-            else{
-                $touite=new Touite\Touite($texte, $date_publication);
-            }
-            
-            //insertion dans la bd
-            $touite->inserer();
 
-
-
+            //Insertion du touite
+            $touite=Touite\Touite::insererCreer($texte, $date_publication, $dest);
 
             $contenu="<b>Touite publié avec succès!</b></br><p>(normalement ^^')</p>";
         }
