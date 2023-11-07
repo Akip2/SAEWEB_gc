@@ -6,12 +6,13 @@ use iutnc\touiter\tag as Tag;
 
 class Touite{
     private string $texte;
-    private ?string $id_image;
+    private ?string $chemin_image;
 
     private string $date_publication;
 
     private int $id_touite;
-    private int $id_auteur;
+    private string $nom_auteur;
+    private string $prenom_auteur;
 
     public function __construct(int $id_touite){
         $this->id_touite=$id_touite;
@@ -19,7 +20,10 @@ class Touite{
         $bd=Connection\ConnectionFactory::makeConnection();
 
         $st=$bd->prepare("
-            SELECT text, id_image, id_auteur, datePubli FROM touite WHERE id=?;
+            SELECT text, chemin, id_auteur, nom, prenom, datePubli FROM touite
+            inner join utilisateur on utilisateur.id = id_auteur 
+            left join image on touite.id_image = image.id 
+            WHERE touite.id=?;
         ");
 
         $st->bindParam(1, $id_touite);
@@ -30,9 +34,10 @@ class Touite{
 
         if($data!=false){
             $this->texte=$data["text"];
-            $this->id_image=$data["id_image"];
+            $this->chemin_image=$data["chemin"];
             $this->date_publication=$data["datePubli"];
-            $this->id_auteur=$data["id_auteur"];
+            $this->nom_auteur=$data["nom"];
+            $this->prenom_auteur=$data["prenom"];
         }
         else{
             //AUCUNE LIGNE TROUVEE

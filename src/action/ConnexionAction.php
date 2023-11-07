@@ -4,6 +4,8 @@ namespace iutnc\touiter\action;
 
 use iutnc\touiter\auth\Auth;
 use iutnc\touiter\auth\AuthException;
+use iutnc\touiter\touite\ListeTouite;
+use iutnc\touiter\render\RenderListe;
 
 class ConnexionAction extends Action{
 	public function execute() : string{
@@ -20,6 +22,9 @@ class ConnexionAction extends Action{
 			try{
 				Auth::authenticate($mail, $mdp);
 				$page = "<h2>Bienvenue ".$mail."</h2><br/><p>Voici vos touites:</p><br>";
+				$listeTouite = ListeTouite::listeTouiteUser($_SESSION['user']->mail);
+                $rl = new RenderListe($listeTouite);
+                $page = $page.$rl->render(1);
 			}
 			catch(AuthException $e){
 				$page = "<h3> Mot de passe ou identifiant incorrect</h3><br/>";	

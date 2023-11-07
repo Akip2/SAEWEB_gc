@@ -1,7 +1,8 @@
 <?php
 
 namespace iutnc\touiter\touite;
-use iutnc\touiter\connection\ConnexionFactory;
+use Exception;
+use iutnc\touiter\connection\ConnectionFactory;
 use iutnc\touiter\touite\Touite;
 
 class ListeTouite{
@@ -28,10 +29,10 @@ class ListeTouite{
         $listes = new ListeTouite("Touites associé au tag : ".$tag);
 
         $st=$bd->prepare("
-           Select text,chemin,datePubli from tag ta inner join touite2tag tt 
+           Select touite.id from tag ta inner join touite2tag tt 
                 inner join on ta.id = tt.id_tag 
                 inner join touite to on to.id = tt.id_touite
-                inner join image on image.id = to.id_image
+                left join image on image.id = to.id_image
                 where ta.libelle = ? order by datePubli DESC;
         ");
 
@@ -39,27 +40,27 @@ class ListeTouite{
 
         $st->execute();
         while($data=$st->fetch()) {
-            $listes->ajouterTouite(new Touite($data["text"],$data["datePubli"],$data["chemin"]));
+            $listes->ajouterTouite(new Touite($data["id"]));
         }
         return $listes;
     }
 
     public static function listeTouiteUser(string $user) : ListeTouite {
         $bd=ConnectionFactory::makeConnection();
-        $listes = new ListeTouite("Touites posté par l'utilisateur : ".$tag);
+        $listes = new ListeTouite("Touites posté par l'utilisateur : ".$user);
 
         $st=$bd->prepare("
-           Select text,chemin,datePubli from touite to on to.id = tt.id_touite
-                inner join user on to.id_user = user.id
-                inner join image on image.id = to.id_image
-                where ta.libelle = ? order by datePubli DESC;
-        ");
+            Select touite.id from touite 
+                inner join utilisateur on touite.id_auteur = utilisateur.id  
+                left join image on image.id = touite.id_image 
+                where utilisateur.mail = ? order by datePubli DESC;
+            ");
 
-        $st->bindParam(1, $tag);
+        $st->bindParam(1, $user);
 
         $st->execute();
         while($data=$st->fetch()) {
-            $listes->ajouterTouite(new Touite($data["text"],$data["datePubli"],$data["chemin"]));
+            $listes->ajouterTouite(new Touite($data["id"]));
         }
         return $listes;
     }

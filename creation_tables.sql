@@ -10,7 +10,7 @@ Constraint primary key(id)
 
 Create Table image(
 id INT(3) NOT NULL AUTO_INCREMENT,
-descImage varchar(500),
+descImage varchar(200),
 chemin varchar(60),
 Constraint primary key(id)
 );
@@ -21,7 +21,7 @@ id INT(4) NOT NULL AUTO_INCREMENT,
 text varchar(235),
 id_image int(3),
 id_auteur int(3) NOT NULL,
-datePubli date,
+datePubli datetime,
 Constraint primary key(id),
 foreign key(id_image) references image(id),
 foreign key(id_auteur) references utilisateur(id)

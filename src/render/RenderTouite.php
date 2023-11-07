@@ -1,30 +1,31 @@
 <?php 
 
-namespace iutnc\touiter\render\Render;
+namespace iutnc\touiter\render;
 use iutnc\touiter\touite\Touite;
 use iutnc\touiter\render\Renderer;
 
 class RenderTouite implements Renderer {
 
-    private string $nomListe;
+    private Touite $touite;
 
     public function __construct(touite $t){
         $this->touite = $t; 
     }
 
-    public function render(int $selector){
+    public function render(int $selector) : string{
         return (($selector ===1) ? $this->compact() : $this->long());
     }
 
     public function compact() :string {
-        $res = "<div>".$this->touite->text." <a href=\"lien vers le long\"> voir plus </a></div><br>";
-        $res;
+        $res = "<div>".$this->touite->texte." <a href=\"index.php?action=show_touite&id=".$this->touite->id_touite."\"> voir plus </a></div><br>";
+        return $res;
     }
 
     public function long() :string  {
-        $res = "<div>".$this->touite->auteur."<br>".$this->touite->text.
-        "<img src=\"".$this->touite->path."\"> </img> <br>".
-        $this->touite->score."</div> <br>";
+        $res = "<div>".$this->touite->nom_auteur." ".$this->touite->prenom_auteur.
+        "<br>".$this->touite->texte.
+        "<img src=\"".$this->touite->chemin_image."\"> </img> <br> </div>";
+        //$this->touite->score."</div> <br>";
         return $res;
     }
 }

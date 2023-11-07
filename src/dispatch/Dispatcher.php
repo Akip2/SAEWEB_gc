@@ -25,15 +25,20 @@ class Dispatcher{
             case "connexion":
                 $action_class= new Action\ConnexionAction();
                 break;
-
             case "publish_touite":
                 $action_class= new Action\PublishTouiteAction();
                 break;
-
             case "noter":
                 $action_class= new Action\NoterAction();
                 break;
+            case "show_touite":
+                $action_class= new Action\ShowTouiteAction();
+                break;
 
+            case "list_touite_utilisateur":
+                $action_class= new Action\AfficherTouiteUtilisateurAction();
+                break;
+                
             default:
                 $action_class = new Action\DefaultAction();
         }
