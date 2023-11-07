@@ -3,6 +3,7 @@
 namespace iutnc\touiter\action;
 
 use iutnc\touiter\auth\Auth;
+use iutnc\touiter\auth\AuthException;
 
 class InscriptionAction extends Action{
 	public function execute() : string{
