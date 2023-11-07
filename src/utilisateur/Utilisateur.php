@@ -40,9 +40,9 @@ class Utilisateur{
             $req = $bdd->prepare("SELECT utilisateur.prenom, utilisateur.nom FROM utilisateur INNER JOIN suivreUtilisateur ON utilisateur.id = suivreUtilisateur.id_suiveur WHERE suivreUtilisateur.id_suivit = :pidUtilisateur;");
             $req->bindParam(":pidUtilisateur", $_SESSION['user']->id);
             $req->execute();
-            $donnee = $req->fetch();
+            
             $html ="<p>Vos suiveurs:</p></br><ul>\n";
-            while($donnee !== null) {
+            while($donnee = $req->fetch()) {
                 $html = $html."<li>".$donnee["prenom"]." ".$donnee["nom"]."</li>";
             }
             $html= $html."</ul><br><p>Moyenne de vos touite:</p>";
