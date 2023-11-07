@@ -46,7 +46,7 @@ class ListeTouite{
 
     public static function listeTouiteUser(string $user) : ListeTouite {
         $bd=ConnectionFactory::makeConnection();
-        $listes = new ListeTouite("Touites posté par l'utilisateur : ".$tag);
+        $listes = new ListeTouite("Touites posté par l'utilisateur : ".$user);
 
         $st=$bd->prepare("
             Select touite.id from touite 
