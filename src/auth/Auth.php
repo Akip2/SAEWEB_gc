@@ -8,7 +8,7 @@ use iutnc\touiter\connection\ConnectionFactory;
 class Auth{
 	public static function authenticate(string $email, string $passwd): void{
 		$bdd = ConnectionFactory::makeConnection();
-		$req = $bdd->prepare("SELECT nom, prenom, mail, motdepasse, role FROM Utilisateur WHERE mail = :pemail");
+		$req = $bdd->prepare("SELECT nom, prenom, mail, motdepasse, role FROM utilisateur WHERE mail = :pemail");
 		$req->bindParam(":pemail", $email);
 		$req->execute();
 		$donnee = $req->fetch();
@@ -31,13 +31,13 @@ class Auth{
 	public static function register(string $nom, string $prenom, string $mail, string $passwd): void{
 		$hash = password_hash($passwd, PASSWORD_DEFAULT, ["cost" => 12]);
 		$bdd = ConnectionFactory::makeConnection();
-		$req = $bdd->prepare("SELECT COUNT(mail) FROM Utilisateur WHERE mail LIKE :pemail;");
+		$req = $bdd->prepare("SELECT COUNT(mail) FROM utilisateur WHERE mail LIKE :pemail;");
 		$req->bindParam(":pemail", $mail);
 		$req->execute();
 		$donnee = $req->fetch();
 		if(!($donnee[0] === 0)){
 			throw new AuthException;
 		}
-		$insertion = $bdd->exec("INSERT INTO Utilisateur(nom, prenom, mail, motdepasse,role) VALUES (\"".$nom."\",\"".$prenom."\",\"".$mail."\",\"".$hash."\",1);");
+		$insertion = $bdd->exec("INSERT INTO utilisateur(nom, prenom, mail, motdepasse,role) VALUES (\"".$nom."\",\"".$prenom."\",\"".$mail."\",\"".$hash."\",1);");
 	}
 }

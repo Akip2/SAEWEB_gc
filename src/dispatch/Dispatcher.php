@@ -18,7 +18,11 @@ class Dispatcher{
 
     public function run():void{
         switch($this->action){
-            
+            case "inscription":
+                $action_class= new Action\InscriptionAction();
+                break;
+            default:
+                $action_class = new Action\DefaultAction();
         }
 
         $html=$action_class->execute();
