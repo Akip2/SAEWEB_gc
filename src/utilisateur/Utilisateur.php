@@ -57,9 +57,12 @@ class Utilisateur{
             $reqSommeTouite->execute();
             $donnee = $reqSommeTouite->fetch();
             $sommeTouite = intval($donnee[0]);
-            $html = $html."<h4>".(sommeTouite/nbTouite)."</h4>";
+            $html = $html."<h4>".($sommeTouite/$nbTouite)."</h4>";
             return $html;
+        }else{
+            return "";
         }
+    }
     public static function suivreUtilisateur(int $idUtilisateur){
         $bdd = ConnectionFactory::makeConnection();
         $req = $bdd->prepare("INSERT INTO suivreUtilisateur(id_suiveur, id_suivit) VALUES ({$_SESSION["user"]->id}, $idUtilisateur");
