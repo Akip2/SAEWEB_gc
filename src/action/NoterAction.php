@@ -7,18 +7,18 @@ class NoterAction extends Action {
             $note = Utilisateur::verifierAvis($_GET["idTouite"]);
             if($note !== null){
                 if($note > 0){
-                    $page = "<form id=\"noter\" method=\"POST\" action=\"?action=NoterAction\"/>
+                    $page = "<form id=\"noter\" method=\"POST\" action=\"?action=noter\"/>
                     <input type='radio' name='choix' value='Dislike'>
                     <button type=\"submit\">Valider</button>
                     </form>";
                 }else{
-                    $page = "<form id=\"noter\" method=\"POST\" action=\"?action=NoterAction\"/>
+                    $page = "<form id=\"noter\" method=\"POST\" action=\"?action=noter\"/>
                     <input type='radio' name='choix' value='Like'>
                     <button type=\"submit\">Valider</button>
                     </form>";
                 }  
             }else{
-                "<form id=\"noter\" method=\"POST\" action=\"?action=NoterAction\"/>
+                "<form id=\"noter\" method=\"POST\" action=\"?action=noter\"/>
                             <input type='radio' name='choix' value='Like'>
                             <input type='radio' name='choix' value='Dislike'>
                             <button type=\"submit\">Valider</button>

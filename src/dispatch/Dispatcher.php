@@ -30,6 +30,10 @@ class Dispatcher{
                 $action_class= new Action\PublishTouiteAction();
                 break;
 
+            case "noter":
+                $action_class= new Action\NoterAction();
+                break;
+
             default:
                 $action_class = new Action\DefaultAction();
         }
