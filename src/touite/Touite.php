@@ -1,6 +1,7 @@
 <?php
 
 namespace iutnc\touiter\touite;
+use Exception;
 use iutnc\touiter\connection as Connection;
 use iutnc\touiter\tag as Tag;
 
