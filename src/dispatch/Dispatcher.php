@@ -34,11 +34,9 @@ class Dispatcher{
             case "show_touite":
                 $action_class= new Action\ShowTouiteAction();
                 break;
-
-            case "list_touite_utilisateur":
-                $action_class= new Action\AfficherTouiteUtilisateurAction();
+            case "follow_tag":
+                $action_class=new Action\FollowTagAction();
                 break;
-                
             default:
                 $action_class = new Action\DefaultAction();
         }
