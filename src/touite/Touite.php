@@ -6,33 +6,58 @@ use iutnc\touiter\tag as Tag;
 
 class Touite{
     private string $texte;
-    private ?string $chemin_image;
+    private ?string $id_image;
 
     private string $date_publication;
 
-    public function __construct(string $t, string $date, string $img=null){
-        $this->texte=$t;
-        $this->chemin_image=$img;
+    private int $id_touite;
+    private int $id_auteur;
 
- 
-        $this->date_publication = $date;
+    public function __construct(int $id_touite){
+        $this->id_touite=$id_touite;
+
+        $bd=Connection\ConnectionFactory::makeConnection();
+
+        $st=$bd->prepare("
+            SELECT text, id_image, id_auteur, datePubli FROM touite WHERE id=?;
+        ");
+
+        $st->bindParam(1, $id_touite);
+
+        $st->execute();
+
+        $data=$st->fetch();
+
+        if($data!=false){
+            $this->texte=$data["text"];
+            $this->id_image=$data["id_image"];
+            $this->date_publication=$data["datePubli"];
+            $this->id_auteur=$data["id_auteur"];
+        }
+        else{
+            //AUCUNE LIGNE TROUVEE
+        }
+
 
     }
     	
 
-
-    public function inserer(){
+    /**
+     * Fonction inserant un touite avec les données
+     * retourne l'objet Touite inseré
+     */
+    public static function insererCreer(string $texte, string $date, string $img=null) : Touite{
         $bd=Connection\ConnectionFactory::makeConnection();
 
 
         //Ajout dans la table image potentiel
         $id_image=null;
-        if($this->chemin_image!=null){
+        if($img!=null){
             $st=$bd->prepare("
                 INSERT INTO image(chemin) values(?);
             ");
 
-            $st->bindParam(1, $this->chemin_image);
+            $st->bindParam(1, $img);
 
             $st_execute();
 
@@ -51,9 +76,9 @@ class Touite{
         //Ajout dans la table Touite
         $st=$bd->prepare("INSERT INTO touite(text, id_image, datePubli, id_auteur) values(?,?,?,?);");
 
-        $st->bindParam(1, $this->texte);
+        $st->bindParam(1, $texte);
         $st->bindParam(2, $id_image);
-        $st->bindParam(3, $this->date_publication);
+        $st->bindParam(3, $date);
 
         $id_auteur=$_SESSION["user"]->id;
         $st->bindParam(4, $id_auteur);
@@ -71,8 +96,8 @@ class Touite{
         $id_touite=$data["idTouite"];
 
         
-        //Actions sur le tag
-        $tags=$this->getTags();
+        //Actions sur les tag
+        $tags=self::getTags($texte);
 
         foreach($tags as $tag){
             $id_tag=Tag\Tag::getTagId($tag);
@@ -84,17 +109,13 @@ class Touite{
                     INSERT INTO tag(libelle) values(?);
                 ");
     
-                $st->bindParam(1, $this->texte);
+                $st->bindParam(1, $tag);
 
                 $st->execute();
 
                 //Recuperation de l'id du tag nouvellement ajouté
                 $id_tag=Tag\Tag::getTagId($tag);
             }
-
-
-
-
 
             //Ajout dans touite2tag
             $st=$bd->prepare("
@@ -105,25 +126,18 @@ class Touite{
             $st->bindParam(2, $id_tag);
 
             $st->execute();
+        }
 
-        }       
-    }
-
-
-    public static function getTouiteId(){
-        $bd=Connection\ConnectionFactory::makeConnection();
-
-        $st=$bd->prepare(";
-        ");
+        return new Touite($id_touite);
     }
 
 
 
-    public function getTags():Array{
+    public static function getTags(string $texte):Array{
         $tags=[];
         $istag=false;
         $tag="";
-        foreach (str_split($this->texte) as $caractere) {
+        foreach (str_split($texte) as $caractere) {
             if($caractere=="#"){  //Reperage d'un debut de tag
                 $istag=true;
 
