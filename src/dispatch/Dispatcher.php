@@ -17,9 +17,13 @@ class Dispatcher{
     }
 
     public function run():void{
+        session_start();
         switch($this->action){
             case "inscription":
                 $action_class= new Action\InscriptionAction();
+                break;
+            case "connexion":
+                $action_class= new Action\ConnexionAction();
                 break;
             default:
                 $action_class = new Action\DefaultAction();
@@ -31,6 +35,13 @@ class Dispatcher{
     }
 
     private function renderPage(string $html): void{
-        echo $html;
+        $page = "<!doctype html>
+        <html lang=\"fr\">
+        <head>
+            <meta charset=\"utf-8\">
+            <title>Touiter</title>
+            <link rel=\"stylesheet\" href=\"style.css\">
+        </head></body>".$html."<br><br><a href=\"?home\"><button>Accueil</button></a></body></html>";
+        print $page;
     }
 }
