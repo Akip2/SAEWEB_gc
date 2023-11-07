@@ -31,18 +31,19 @@ class PublishTouiteAction extends Action {
             $touite; //Initialisation du touite
 
             $dest=null;
-            if(isset($_POST["image"])){
+            if($_FILES["image"]["tmp_name"]!=null){
+
                 $tmp=$_FILES["image"]["tmp_name"];
 
                 $filename=uniqid();
                 
                 $dest=__DIR__."/../../img/$filename.png"; //Stockage de l'image côté serveur
 
+                move_uploaded_file($tmp, $dest);
             }
 
             //Insertion du touite
             $touite=Touite\Touite::insererCreer($texte, $date_publication, $dest);
-
             $contenu="<b>Touite publié avec succès!</b></br><p>(normalement ^^')</p>";
         }
 

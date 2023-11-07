@@ -52,6 +52,7 @@ class Touite{
 
         //Ajout dans la table image potentiel
         $id_image=null;
+
         if($img!=null){
             $st=$bd->prepare("
                 INSERT INTO image(chemin) values(?);
@@ -59,17 +60,19 @@ class Touite{
 
             $st->bindParam(1, $img);
 
-            $st_execute();
+            $st->execute();
 
 
             //Recuperation de l'id de l'image nouvelement ajoutee
             $st=$bd->prepare("
-                SELECT max(id) id_image FROM image;
+                SELECT max(id) idImage FROM image;
             ");
 
-            $data=$st->fetch();
+            $st->execute();
 
-            $id_image=$data["id_image"];
+            $data=$st->fetch();
+            
+            $id_image=$data["idImage"];
         }
 
 
@@ -162,5 +165,10 @@ class Touite{
         }
 
         return $tags;
+    }
+
+    public function __get( string $attr) : mixed {
+        if (property_exists($this, $attr)) return $this->$attr;
+        throw new Exception("$attr : invalid property");
     }
 }
