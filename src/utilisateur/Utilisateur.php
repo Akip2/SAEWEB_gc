@@ -19,7 +19,6 @@ class Utilisateur{
         $this->role = $r;
     }
 
-    
     public static function verifierAvis(int $idTouite): int{
         $bdd = ConnectionFactory::makeConnection();
 		$req = $bdd->prepare("SELECT note FROM evaluation WHERE id_utilisateur = ? and id_touite = ?");
@@ -30,13 +29,11 @@ class Utilisateur{
 
         return intval($donnee["note"]);
     }
-
-    public static function ajouterAvis(int $idTouite, $note): void{
+    public static function ajouterAvis(int $idTouite,int $note) : void{
         $bdd = ConnectionFactory::makeConnection();
         $req = $bdd->prepare("INSERT INTO evaluation(id_touite, id_utilisateur, note) VALUES ($idTouite, {$_SESSION["user"]->id}, $note");
 		$req->execute();
     }
-
     public static function utilisateurNarcissique():string{
         if(isset($_SESSION['user'])){
             $bdd = ConnectionFactory::makeConnection();
@@ -63,6 +60,16 @@ class Utilisateur{
             $html = $html."<h4>".(sommeTouite/nbTouite)."</h4>";
             return $html;
         }
+    public static function suivreUtilisateur(int $idUtilisateur){
+        $bdd = ConnectionFactory::makeConnection();
+        $req = $bdd->prepare("INSERT INTO suivreUtilisateur(id_suiveur, id_suivit) VALUES ({$_SESSION["user"]->id}, $idUtilisateur");
+		$req->execute();
+    }
+
+    public static function nePlusSuivreUtilisateur(int $idUtilisateur){
+        $bdd = ConnectionFactory::makeConnection();
+        $req = $bdd->prepare("DELETE from suivreUtilisateur where id_suiveur = {$_SESSION["user"]->id} and id_suivit = $idUtilisateur");
+		$req->execute();
     }
 
     public function __get( string $attr) : mixed {
