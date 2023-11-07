@@ -20,7 +20,7 @@ class Utilisateur{
     }
 
     
-    public static function verifierAvis(int $idTouite){
+    public static function verifierAvis(int $idTouite): int{
         $bdd = ConnectionFactory::makeConnection();
 		$req = $bdd->prepare("SELECT note FROM evaluation WHERE id_utilisateur = ? and id_touite = ?");
 		$req->bindParam(1, $_SESSION["user"]->id);
@@ -28,13 +28,41 @@ class Utilisateur{
 		$req->execute();
 		$donnee = $req->fetch();
 
-        return $donnee["note"];
+        return intval($donnee["note"]);
     }
 
-    public static function ajouterAvis(int $idTouite, $note){
+    public static function ajouterAvis(int $idTouite, $note): void{
         $bdd = ConnectionFactory::makeConnection();
         $req = $bdd->prepare("INSERT INTO evaluation(id_touite, id_utilisateur, note) VALUES ($idTouite, {$_SESSION["user"]->id}, $note");
 		$req->execute();
+    }
+
+    public static function utilisateurNarcissique():string{
+        if(isset($_SESSION['user'])){
+            $bdd = ConnectionFactory::makeConnection();
+            $req = $bdd->prepare("SELECT utilisateur.prenom, utilisateur.nom FROM utilisateur INNER JOIN suivreUtilisateur ON utilisateur.id = suivreUtilisateur.id_suiveur WHERE suivreUtilisateur.id_suivit = :pidUtilisateur;");
+            $req->bindParam(":pidUtilisateur", $_SESSION['user']->id);
+            $req->execute();
+            $donnee = $req->fetch();
+            $html ="<p>Vos suiveurs:</p></br><ul>\n";
+            while($donnee !== null) {
+                $html = $html."<li>".$donnee["prenom"]." ".$donnee["nom"]."</li>";
+            }
+            $html= $html."</ul><br><p>Moyenne de vos touite:</p>";
+            $reqNbTouite = $bdd->prepare("");
+            $reqNbTouite->execute();
+            $donnee = $req->fetch();
+            $nbTouite = intval($donnee[0]);
+            $reqSommeTouite = $bdd->prepare("SELECT evaluation.note FROM evaluation
+                INNER JOIN touite ON evaluation.id_touite = touite.id
+                WHERE touite.id_auteur = :pidUtilisateur;");
+            $reqSommeTouite->bindParam(":pidUtilisateur", $_SESSION['user']->id);
+            $reqSommeTouite->execute();
+            $donnee = $reqSommeTouite->fetch();
+            $sommeTouite = intval($donnee[0]);
+            $html = $html."<h4>".(sommeTouite/nbTouite)."</h4>";
+            return $html;
+        }
     }
 
     public function __get( string $attr) : mixed {
