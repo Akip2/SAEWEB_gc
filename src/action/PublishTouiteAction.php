@@ -37,7 +37,7 @@ class PublishTouiteAction extends Action {
 
                 $filename=uniqid();
                 
-                $dest=__DIR__."/../../img/$filename.png"; //Stockage de l'image côté serveur
+                $dest="img/$filename.png"; //Stockage de l'image côté serveur
 
                 move_uploaded_file($tmp, $dest);
             }
