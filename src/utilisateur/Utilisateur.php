@@ -4,12 +4,14 @@ namespace iutnc\touiter\utilisateur;
 use Exception;
 
 class Utilisateur{
+    private int $id;
     private string $nom;
     private string $prenom;
     private string $mail;
     private int $role;
 
-    public function __construct(string $n, string $p, string $m, int $r){
+    public function __construct(int $id, string $n, string $p, string $m, int $r){
+        $this->id = $id;
         $this->nom = $n;
         $this->prenom = $p;
         $this->mail = $m;

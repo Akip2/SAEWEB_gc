@@ -1,9 +1,6 @@
 <?php
 
 namespace iutnc\touiter\touite;
-
-
-session_start();
 use iutnc\touiter\connection as Connection;
 use iutnc\touiter\tag as Tag;
 

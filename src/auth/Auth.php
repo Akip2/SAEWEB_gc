@@ -8,7 +8,7 @@ use iutnc\touiter\connection\ConnectionFactory;
 class Auth{
 	public static function authenticate(string $mail, string $passwd): void{
 		$bdd = ConnectionFactory::makeConnection();
-		$req = $bdd->prepare("SELECT nom, prenom, mail, motdepasse, role FROM utilisateur WHERE mail = :pemail");
+		$req = $bdd->prepare("SELECT id, nom, prenom, mail, motdepasse, role FROM utilisateur WHERE mail = :pemail");
 		$req->bindParam(":pemail", $mail);
 		$req->execute();
 		$donnee = $req->fetch();
@@ -20,7 +20,7 @@ class Auth{
 				throw new AuthException("invalid motdepasse");
 			}
 			else{
-				$u = new Utilisateur($donnee["nom"], $donnee["prenom"], $donnee["mail"], intval($donnee["role"]));
+				$u = new Utilisateur(intval($donnee["id"]), $donnee["nom"], $donnee["prenom"], $donnee["mail"], intval($donnee["role"]));
 				$_SESSION['user'] = $u;
 			}
 		}

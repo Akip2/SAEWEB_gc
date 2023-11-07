@@ -9,7 +9,8 @@ class DefaultAction extends Action{
         <a href=\"index.php?action=connexion\">Connexion</href><br>
         <a href=\"index.php?action=list_touite\">Lister les Touites</href><br>
         <a href=\"index.php?action=list_user_touite\">Touites d'une Personne</href><br>
-        <a href=\"index.php?action=list_tag_touite\">Touites d'un tag</href><br>";
+        <a href=\"index.php?action=list_tag_touite\">Touites d'un tag</href><br>
+        <a href=\"index.php?action=publish_touite\">Publier un touite</href><br>";
 
     }
 }

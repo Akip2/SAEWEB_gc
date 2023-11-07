@@ -1,5 +1,5 @@
 <?php
-namespace iutnc\docsie\action;
+namespace iutnc\touiter\action;
 use iutnc\touiter\touite as Touite;
 
 require_once "Action.php";
@@ -12,7 +12,7 @@ class PublishTouiteAction extends Action {
         $contenu;
         if($this->http_method==="GET"){
             $contenu="
-            <form method='post' enctype='multipart/form-data' action='?action=publish-touite'>
+            <form method='post' enctype='multipart/form-data' action='?action=publish_touite'>
                 Texte : <input name='texte' type='text'>
                 <input type='submit' value='Publier'>
                 <input type='file' name='image' accept='.png, .jpg, .jpeg, .gif'>
@@ -37,10 +37,10 @@ class PublishTouiteAction extends Action {
                 
                 $dest=__DIR__."/../../img/$filename.png"; //Stockage de l'image côté serveur
 
-                $touite=new Touite\Touite($texte, $date, $dest);
+                $touite=new Touite\Touite($texte, $date_publication, $dest);
             }
             else{
-                $touite=new Touite\Touite($texte, $date);
+                $touite=new Touite\Touite($texte, $date_publication);
             }
             
             //insertion dans la bd
