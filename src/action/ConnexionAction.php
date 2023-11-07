@@ -19,7 +19,7 @@ class ConnexionAction extends Action{
 			$mdp = filter_var($_POST['mdp'], FILTER_SANITIZE_SPECIAL_CHARS);
 			try{
 				Auth::authenticate($mail, $mdp);
-				$page = "<h2>Bienvnue ".$mail."</h2><br/><p>Voici vos touites:</p><br>";
+				$page = "<h2>Bienvenue ".$mail."</h2><br/><p>Voici vos touites:</p><br>";
 			}
 			catch(AuthException $e){
 				$page = "<h3> Mot de passe ou identifiant incorrect</h3><br/>";	
