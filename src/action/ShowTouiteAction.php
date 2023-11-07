@@ -10,8 +10,7 @@ class ShowTouiteAction extends Action{
 		$id = $_GET["id"];
         $t = new Touite($id);
         $render = new RenderTouite($t);
-        $res = "  <h1>Touiter</h1>
-        <H2>Touite de ".$t->auteur."</h2>.$render->render(2)";
+        $res = $res.$render->render(2);
         return $res;
 	}
 }

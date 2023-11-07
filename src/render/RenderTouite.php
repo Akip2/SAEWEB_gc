@@ -22,7 +22,7 @@ class RenderTouite implements Renderer {
     }
 
     public function long() :string  {
-        $res = "<div>". //$this->touite->auteur.
+        $res = "<div>".$this->touite->nom_auteur." ".$this->touite->prenom_auteur.
         "<br>".$this->touite->texte.
         "<img src=\"".$this->touite->chemin_image."\"> </img> <br> </div>";
         //$this->touite->score."</div> <br>";

@@ -33,6 +33,7 @@ class Dispatcher{
                 break;
             case "show_touite":
                 $action_class= new Action\ShowTouiteAction();
+                break;
             default:
                 $action_class = new Action\DefaultAction();
         }
