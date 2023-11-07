@@ -10,7 +10,7 @@ class ShowTouiteAction extends Action{
 		$id = $_GET["id"];
         $t = new Touite($id);
         $render = new RenderTouite($t);
-        $res = $res.$render->render(2);
+        $res = $render->render(2);
         return $res;
 	}
 }

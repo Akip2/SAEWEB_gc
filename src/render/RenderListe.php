@@ -3,6 +3,7 @@
 namespace iutnc\touiter\render;
 use iutnc\touiter\touite\Touite;
 use iutnc\touiter\render\Renderer;
+use iutnc\touiter\render\RenderTouite;
 use iutnc\touiter\touite\ListeTouite;
 
 class RenderListe implements Renderer {

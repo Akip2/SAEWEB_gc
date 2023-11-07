@@ -1,6 +1,7 @@
 <?php
 
 namespace iutnc\touiter\touite;
+use Exception;
 use iutnc\touiter\connection\ConnectionFactory;
 use iutnc\touiter\touite\Touite;
 
@@ -46,7 +47,7 @@ class ListeTouite{
 
     public static function listeTouiteUser(string $user) : ListeTouite {
         $bd=ConnectionFactory::makeConnection();
-        $listes = new ListeTouite("Touites posté par l'utilisateur : ".$tag);
+        $listes = new ListeTouite("Touites posté par l'utilisateur : ".$user);
 
         $st=$bd->prepare("
             Select touite.id from touite 
