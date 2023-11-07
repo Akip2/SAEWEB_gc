@@ -22,7 +22,8 @@ class Utilisateur{
     public static function verifierAvis(int $idTouite): int{
         $bdd = ConnectionFactory::makeConnection();
 		$req = $bdd->prepare("SELECT note FROM evaluation WHERE id_utilisateur = ? and id_touite = ?");
-		$req->bindParam(1, $_SESSION["user"]->id);
+        $u = unserialize($_SESSION["user"]);
+		$req->bindParam(1, $u->id);
         $req->bindParam(2, $idTouite);
 		$req->execute();
 		$donnee = $req->fetch();
@@ -38,7 +39,8 @@ class Utilisateur{
         if(isset($_SESSION['user'])){
             $bdd = ConnectionFactory::makeConnection();
             $req = $bdd->prepare("SELECT utilisateur.prenom, utilisateur.nom FROM utilisateur INNER JOIN suivreUtilisateur ON utilisateur.id = suivreUtilisateur.id_suiveur WHERE suivreUtilisateur.id_suivit = :pidUtilisateur;");
-            $req->bindParam(":pidUtilisateur", $_SESSION['user']->id);
+            $u = unserialize($_SESSION['user']);
+            $req->bindParam(":pidUtilisateur", $u->id);
             $req->execute();
             
             $html ="<p>Vos suiveurs:</p></br><ul>\n";
