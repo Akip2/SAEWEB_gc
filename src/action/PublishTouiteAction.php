@@ -25,8 +25,8 @@ class PublishTouiteAction extends Action {
             
             //date de publication 
             date_default_timezone_set('Europe/Paris');
-            $date_publication = date('d-m-Y H:i:s');
-
+            $date_publication = date('Y-m-d');
+            //print($date_publication);
             
             $touite; //Initialisation du touite
 
@@ -49,8 +49,7 @@ class PublishTouiteAction extends Action {
 
 
 
-            $contenu.="                
-            ";
+            $contenu="<b>Touite publié avec succès!</b></br><p>(normalement ^^')</p>";
         }
 
         return $contenu;
