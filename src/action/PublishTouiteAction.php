@@ -49,8 +49,7 @@ class PublishTouiteAction extends Action {
 
 
 
-            $contenu.="                
-            ";
+            $contenu="<b>Touite publié avec succès!</b></br><p>(normalement ^^')</p>";
         }
 
         return $contenu;

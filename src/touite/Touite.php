@@ -4,7 +4,6 @@ namespace iutnc\touiter\touite;
 use iutnc\touiter\connection as Connection;
 use iutnc\touiter\tag as Tag;
 
-
 class Touite{
     private string $texte;
     private ?string $chemin_image;
@@ -25,15 +24,41 @@ class Touite{
     public function inserer(){
         $bd=Connection\ConnectionFactory::makeConnection();
 
+
+        //Ajout dans la table image potentiel
+        $id_image=null;
+        if($this->chemin_image!=null){
+            $st=$bd->prepare("
+                INSERT INTO image(chemin) values(?);
+            ");
+
+            $st->bindParam(1, $this->chemin_image);
+
+            $st_execute();
+
+
+            //Recuperation de l'id de l'image nouvelement ajoutee
+            $st=$bd->prepare("
+                SELECT max(id) id_image FROM image;
+            ");
+
+            $data=$st->fetch();
+
+            $id_image=$data["id_image"];
+        }
+
+
         //Ajout dans la table Touite
         $st=$bd->prepare("
-            INSERT INTO touite(text, image, datePubli, id_auteur) values(?,?,?,?);
+            INSERT INTO touite(text, id_image, datePubli, id_auteur) values(?,?,?,?);
         ");
 
         $st->bindParam(1, $this->texte);
-        $st->bindParam(2, $this->chemin_image);
+        $st->bindParam(2, $id_image);
         $st->bindParam(3, $this->date_publication);
-        $st->bindParam(4, $_SESSION["user"]->id);
+
+        $id_auteur=$_SESSION["user"]->id;
+        $st->bindParam(4, $id_auteur);
 
         $st->execute();
 
@@ -100,7 +125,7 @@ class Touite{
         $tags=[];
         $istag=false;
         $tag="";
-        foreach (str_split($cthis->texte) as $caractere) {
+        foreach (str_split($this->texte) as $caractere) {
             if($caractere=="#"){  //Reperage d'un debut de tag
                 $istag=true;
 
