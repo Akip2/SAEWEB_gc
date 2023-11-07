@@ -1,14 +1,16 @@
 <?php 
 
-namespace iutnc\touiter\render\Render;
+namespace iutnc\touiter\render;
 use iutnc\touiter\touite\Touite;
 use iutnc\touiter\render\Renderer;
+use iutnc\touiter\render\RenderTouite;
+use iutnc\touiter\touite\ListeTouite;
 
-class RenderTouite implements Renderer {
+class RenderListe implements Renderer {
 
     private ListeTouite $touites;
 
-    public function __construct(touite $t){
+    public function __construct(ListeTouite $t){
         $this->touites = $t; 
     }
 
@@ -17,8 +19,8 @@ class RenderTouite implements Renderer {
     }
 
     public function compact() {
-        $res = $this->touites->name."<br>"; 
-        foreach($touites->liste as $value) {
+        $res = $this->touites->name."<br> ";
+        foreach($this->touites->liste as $value) {
             $render = new renderTouite($value);
             $res = $res.$render->render(1);
         }

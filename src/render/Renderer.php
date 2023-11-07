@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\deefy\render\Renderer;
+namespace iutnc\touiter\render;
 
 interface Renderer {
     const COMPACT = 1;
