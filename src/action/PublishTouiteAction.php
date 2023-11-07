@@ -37,10 +37,10 @@ class PublishTouiteAction extends Action {
                 
                 $dest=__DIR__."/../../img/$filename.png"; //Stockage de l'image côté serveur
 
-                $touite=new Touite\Touite($texte, $date, $dest);
+                $touite=new Touite\Touite($texte, $date_publication, $dest);
             }
             else{
-                $touite=new Touite\Touite($texte, $date);
+                $touite=new Touite\Touite($texte, $date_publication);
             }
             
             //insertion dans la bd
