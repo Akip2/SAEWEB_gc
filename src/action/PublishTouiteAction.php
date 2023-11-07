@@ -22,6 +22,10 @@ class PublishTouiteAction extends Action {
         else if($this->http_method==="POST"){
 
             $texte=filter_var($_POST["texte"], FILTER_DEFAULT);
+            
+            //date de publication 
+            date_default_timezone_set('Europe/Paris');
+            $date_publication = date('d-m-Y H:i:s');
 
             
             $touite; //Initialisation du touite
@@ -33,15 +37,14 @@ class PublishTouiteAction extends Action {
                 
                 $dest=__DIR__."/../../img/$filename.png"; //Stockage de l'image côté serveur
 
-                $touite=new Touite\Touite($texte, $dest);
+                $touite=new Touite\Touite($texte, $date, $dest);
             }
             else{
-                $touite=new Touite\Touite($texte);
+                $touite=new Touite\Touite($texte, $date);
             }
             
             //insertion dans la bd
             $touite->inserer();
-
 
 
 
