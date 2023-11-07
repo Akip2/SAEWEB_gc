@@ -14,6 +14,7 @@ class DefaultAction extends Action{
         <a href=\"index.php?action=list_tag_touite\">Touites d'un tag</a><br>
         <a href=\"index.php?action=publish_touite\">Publier un touite</a><br>
         <a href=\"index.php?action=list_touite_utilisateur\">Afficher Touite Utilisateur</a><br>
+        <a href=\"index.php?action=list_touite_utilisateur\">Suivre des tags</a><br>
         </div
         <div>".Touite::afficherTouiteAccueil()."</div>";
 
