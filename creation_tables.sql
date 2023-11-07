@@ -8,7 +8,6 @@ role int(2),
 Constraint primary key(id)
 );
 
-
 Create Table image(
 id INT(3) NOT NULL AUTO_INCREMENT,
 descImage varchar(500),
