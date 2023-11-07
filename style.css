@@ -1,6 +1,13 @@
 body{
 	font-family: sans-serif;
 	padding: 5px;
+	display: block;
+	background-color: gray;
+}
+
+div{
+	padding: 5px;
+	background-color: gray;
 }
 
 button{

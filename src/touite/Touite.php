@@ -3,6 +3,9 @@
 namespace iutnc\touiter\touite;
 use iutnc\touiter\connection as Connection;
 use iutnc\touiter\tag as Tag;
+use iutnc\touiter\touite\Touite;
+use iutnc\touiter\touite\ListeTouite;
+use iutnc\touiter\render\RenderListe;
 
 class Touite{
     private string $texte;
@@ -176,14 +179,18 @@ class Touite{
         if (property_exists($this, $attr)) return $this->$attr;
         throw new Exception("$attr : invalid property");
     }
-
-    public static function afficherTouiteAccueil(): void{
+    
+    public static function afficherTouiteAccueil(): string{
         $bd=Connection\ConnectionFactory::makeConnection();
-        $req->execute("SELECT touite.text, utilisateur.prenom, utilisateur.nom FROM touite INNER JOIN utilisateur ON touite.id_auteur = utilisateur.id ORDER BY touite.datePubli DESC;");
-        $donnee = $req->fetch();
-        $listeTouite = array();
-        while($donnee !== null) {
-               $listeTouite[] = new Touite()
-           }   
+        $req = $bd->prepare("SELECT touite.id, touite.text, utilisateur.prenom, utilisateur.nom FROM touite INNER JOIN utilisateur ON touite.id_auteur = utilisateur.id ORDER BY touite.datePubli DESC;");
+        $req->execute();
+        
+        $listeTouite = new ListeTouite("Touite Accueil");
+
+        while($donnee = $req->fetch()){
+            $listeTouite->ajouterTouite(new Touite(intval($donnee[0])));
+        }
+        $render = new RenderListe($listeTouite);
+        return $render->compact();
     }
 }
