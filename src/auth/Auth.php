@@ -2,14 +2,14 @@
 
 namespace iutnc\touiter\auth;
 
-use iutnc\touiter\user\User;
+use iutnc\touiter\utilisateur\Utilisateur;
 use iutnc\touiter\connection\ConnectionFactory;
 
 class Auth{
-	public static function authenticate(string $email, string $passwd): void{
+	public static function authenticate(string $mail, string $passwd): void{
 		$bdd = ConnectionFactory::makeConnection();
 		$req = $bdd->prepare("SELECT nom, prenom, mail, motdepasse, role FROM utilisateur WHERE mail = :pemail");
-		$req->bindParam(":pemail", $email);
+		$req->bindParam(":pemail", $mail);
 		$req->execute();
 		$donnee = $req->fetch();
 		//var_dump($donnee);
@@ -20,7 +20,7 @@ class Auth{
 				throw new AuthException("invalid motdepasse");
 			}
 			else{
-				$u = new User($donnee["nom"], $donnee["prenom"], $donnee["mail"], $donnee["motdepasse"], intval($donnee["role"]));
+				$u = new Utilisateur($donnee["nom"], $donnee["prenom"], $donnee["mail"], intval($donnee["role"]));
 				$_SESSION['user'] = $u;
 			}
 		}

@@ -13,7 +13,7 @@ class Utilisateur{
         $this->nom = $n;
         $this->prenom = $p;
         $this->mail = $m;
-        $this->r = $r;
+        $this->role = $r;
     }
 
     public function __get( string $attr) : mixed {

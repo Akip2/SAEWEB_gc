@@ -3,7 +3,7 @@ id INT(3) NOT NULL AUTO_INCREMENT,
 nom varchar(20),
 prenom varchar(20),
 mail varchar(40),
-motdepasse varchar(20),
+motdepasse varchar(256),
 role int(2),
 Constraint primary key(id)
 );
