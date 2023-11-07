@@ -1,9 +1,10 @@
 <?php
 
 namespace iutnc\touiter\touite;
+
+use Exception;
 use iutnc\touiter\connection as Connection;
 use iutnc\touiter\tag as Tag;
-use iutnc\touiter\touite\Touite;
 use iutnc\touiter\touite\ListeTouite;
 use iutnc\touiter\render\RenderListe;
 
