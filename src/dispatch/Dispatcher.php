@@ -25,6 +25,11 @@ class Dispatcher{
             case "connexion":
                 $action_class= new Action\ConnexionAction();
                 break;
+
+            case "publish_touite":
+                $action_class= new Action\PublishTouiteAction();
+                break;
+
             default:
                 $action_class = new Action\DefaultAction();
         }
