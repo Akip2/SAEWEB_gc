@@ -55,7 +55,7 @@ class Dispatcher{
             <meta charset=\"utf-8\">
             <title>Touiter</title>
             <link rel=\"stylesheet\" href=\"style.css\">
-        </head></body>".$html."<br><br><a href=\"?home\"><button>Accueil</button></a></body></html>";
+        </head><body>".$html."<br><br><a href=\"?home\"><button>Accueil</button></a></body></html>";
         print $page;
     }
 }
