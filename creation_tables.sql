@@ -19,7 +19,7 @@ Constraint primary key(id)
 Create Table touite(
 id INT(4) NOT NULL AUTO_INCREMENT,
 text varchar(235),
-id_image int(3) not null,
+id_image int(3),
 id_auteur int(3) NOT NULL,
 datePubli date,
 Constraint primary key(id),
