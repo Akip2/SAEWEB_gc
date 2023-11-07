@@ -49,9 +49,7 @@ class Touite{
 
 
         //Ajout dans la table Touite
-        $st=$bd->prepare("
-            INSERT INTO touite(text, id_image, datePubli, id_auteur) values(?,?,?,?);
-        ");
+        $st=$bd->prepare("INSERT INTO touite(text, id_image, datePubli, id_auteur) values(?,?,?,?);");
 
         $st->bindParam(1, $this->texte);
         $st->bindParam(2, $id_image);
