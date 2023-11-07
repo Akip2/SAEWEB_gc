@@ -1,5 +1,5 @@
 <?php
-namespace iutnc\docsie\action;
+namespace iutnc\touiter\action;
 use iutnc\touiter\touite as Touite;
 
 require_once "Action.php";
