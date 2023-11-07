@@ -12,7 +12,7 @@ class PublishTouiteAction extends Action {
         $contenu;
         if($this->http_method==="GET"){
             $contenu="
-            <form method='post' enctype='multipart/form-data' action='?action=publish-touite'>
+            <form method='post' enctype='multipart/form-data' action='?action=publish_touite'>
                 Texte : <input name='texte' type='text'>
                 <input type='submit' value='Publier'>
                 <input type='file' name='image' accept='.png, .jpg, .jpeg, .gif'>
