@@ -176,4 +176,14 @@ class Touite{
         if (property_exists($this, $attr)) return $this->$attr;
         throw new Exception("$attr : invalid property");
     }
+
+    public static function afficherTouiteAccueil(): void{
+        $bd=Connection\ConnectionFactory::makeConnection();
+        $req->execute("SELECT touite.text, utilisateur.prenom, utilisateur.nom FROM touite INNER JOIN utilisateur ON touite.id_auteur = utilisateur.id ORDER BY touite.datePubli DESC;");
+        $donnee = $req->fetch();
+        $listeTouite = array();
+        while($donnee !== null) {
+               $listeTouite[] = new Touite()
+           }   
+    }
 }

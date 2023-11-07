@@ -25,7 +25,7 @@ class PublishTouiteAction extends Action {
             
             //date de publication 
             date_default_timezone_set('Europe/Paris');
-            $date_publication = date('Y-m-d');
+            $date_publication = date('Y-m-d H:i:s');
             //print($date_publication);
             
             $touite; //Initialisation du touite

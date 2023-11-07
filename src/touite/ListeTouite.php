@@ -1,6 +1,7 @@
 <?php
 
 namespace iutnc\touiter\touite;
+use Exception;
 use iutnc\touiter\connection\ConnectionFactory;
 use iutnc\touiter\touite\Touite;
 
