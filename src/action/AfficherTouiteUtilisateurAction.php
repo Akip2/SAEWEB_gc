@@ -10,6 +10,8 @@ class AfficherTouiteUtilisateurAction extends Action{
         //$user = new Utilisateur($id);
         $listeTouite = ListeTouite::listeTouiteUser($id);
         $rl = new RenderListe($listeTouite);
-        return $rl->render(1);
+        $html = $rl->render(1);
+        $html .= "<br><h3>Statiques utilisateur</h3>".$user->utilisateurNarcissique();
+        return $html;
     }
 }
