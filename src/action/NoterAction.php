@@ -8,20 +8,20 @@ class NoterAction extends Action {
             if($note !== 0){
                 if($note > 0){
                     $page = "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$_GET["idTouite"]}\"/>
-                    <input type='radio' name='choix' value='Dislike'> Dislike :(
+                    <input type='radio' name='choix' value='Dislike'> Dislike
                     <button type=\"submit\">Valider</button>
                     </form>";
                 }else{
                     $page = "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$_GET["idTouite"]}\"/>
-                    <input type='radio' name='choix' value='Like'> Like :D
+                    <input type='radio' name='choix' value='Like'> Like
                     <button type=\"submit\">Valider</button>
                     </form>";
 
                 }  
             }else{
                 $page = "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$_GET["idTouite"]}\"/>
-                            <input type='radio' name='choix' value='Like'> Like >:)
-                            <input type='radio' name='choix' value='Dislike'> Dislike TwT
+                            <input type='radio' name='choix' value='Like'> Like
+                            <input type='radio' name='choix' value='Dislike'> Dislike
                             <button type=\"submit\">Valider</button>
                             </form>";
             }
