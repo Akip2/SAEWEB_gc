@@ -46,20 +46,19 @@ class RenderTouite implements Renderer {
     public function long() :string  {
         $touite = "";
         $noteTouite = $this->touite->noteTouite();
-        $touite .="<p>Note :".$noteTouite."</p><br>";
+        $touite .="<p>Like :".$noteTouite."</p>";
         if (isset($_SESSION["user"])) {
             $u = unserialize($_SESSION["user"]);
             if ($this->touite->nom_auteur === $u->nom && $this->touite->prenom_auteur === $u->prenom){
-                $touite .= "<a href=\"?action=sup_touite&idTouite=".$this->touite->id_touite."\"> 
-                <input type=\"button\" value=\"Supprimer Touite\"> </a>";
+                $touite .= "<a href=\"?action=sup_touite&idTouite=".$this->touite->id_touite."\"> <input class=\"bouton\" type=\"button\" value=\"Supprimer Touite\"> </a>";
             }else{
 
                 if (Utilisateur::verifierSuivi($this->touite->id_auteur)){
                     $touite .= "<a href=\"?action=suivre&idUtilisateur=".$this->touite->id_auteur."&suivre=1\"> 
-                    <input type=\"button\" value=\"Ne plus suivre\"> </a>";
+                    <input class=\"bouton\" type=\"button\" value=\"Ne plus suivre\"> </a>";
                 }else{
                     $touite .= "<a href=\"?action=suivre&idUtilisateur=".$this->touite->id_auteur."&suivre=0\"> 
-                    <input type=\"button\" value=\"Suivre\"> </a>";
+                    <input class=\"bouton\" type=\"button\" value=\"Suivre\"> </a>";
                 }
 
             }
@@ -86,11 +85,11 @@ class RenderTouite implements Renderer {
             }
         }
         
-        $res = "<p class='touie'>"."<a href=\"index.php?action=list_touite_utilisateur&id=".$this->touite->id_auteur."\">
+        $res = "<p class='touite'>"."<a href=\"index.php?action=list_touite_utilisateur&id=".$this->touite->id_auteur."\">
         ".$this->touite->nom_auteur." ".$this->touite->prenom_auteur." </a><br>".
         "<br>".$this->TexttoTag($this->touite->texte).
-        "<img src=\"".$this->touite->chemin_image."\"> </img> <br> 
-        {$touite} </p>";
+        "<img src=\"".$this->touite->chemin_image."\"> <br> 
+        {$touite}";
         return $res;
     }
 }
