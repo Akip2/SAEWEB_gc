@@ -199,7 +199,13 @@ class Touite{
     public static function supprimerTweet(int $id_touite){
         $bd=Connection\ConnectionFactory::makeConnection();
     
-    
+        $st=$bd->prepare("
+        DELETE FROM evaluation WHERE id_touite=?
+        ");
+
+        $st->bindParam(1, $id_touite);
+        $st->execute();
+        
         //Supression dans la table touite2tag
         $st=$bd->prepare("
             DELETE FROM touite2tag WHERE id_touite=?
