@@ -213,10 +213,26 @@ class Touite{
         return $render->compact();
     }
 
-    public function supprimerTweet(int $id_touite){
+    public static function supprimerTweet(int $id_touite){
         $bd=Connection\ConnectionFactory::makeConnection();
+
+        $st=$bd->prepare("SELECT id_image from touite where id = ?");
+
+        $st->bindParam(1, $id_touite);
+        $st->execute();
+        $donnee = $st->fetch();
+        $idImage =  intval($donnee['id_image']);
+
+        $st->bindParam(1, $id_touite);
+        $st->execute();
     
-    
+        $st=$bd->prepare("
+        DELETE FROM evaluation WHERE id_touite=?
+        ");
+
+        $st->bindParam(1, $id_touite);
+        $st->execute();
+
         //Supression dans la table touite2tag
         $st=$bd->prepare("
             DELETE FROM touite2tag WHERE id_touite=?
@@ -230,8 +246,35 @@ class Touite{
         $st=$bd->prepare("
             DELETE FROM touite WHERE id=?
         ");
-    
+
         $st->bindParam(1, $id_touite);
         $st->execute();
+
+        $st=$bd->prepare("SELECT chemin FROM image WHERE id=?");
+
+        $st->bindParam(1, $idImage);
+        $st->execute();
+
+        $donnee = $st->fetch();
+        $cheminImg =  $donnee['chemin'];
+
+        unlink($cheminImg);
+
+        $st=$bd->prepare("DELETE FROM image WHERE id=?");
+
+        $st->bindParam(1, $idImage);
+        $st->execute();
+    }
+    public function noteTouite(): int{
+        $bd=Connection\ConnectionFactory::makeConnection();
+    
+        $st=$bd->prepare("SELECT SUM(evaluation.note)FROM evaluation WHERE evaluation.id_touite = :pIdTouite;");
+        $st->bindParam(":pIdTouite", $this->id_touite);
+        $st->execute();
+        $donnee = $st->fetch();
+        if($donnee === false){
+            return 0;
+        }
+        return intval($donnee[0]);
     }
 }
