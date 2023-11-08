@@ -36,28 +36,31 @@ div{
 }
 
 .menu{
+	white-space: nowrap;
+	overflow: hidden;
 	width: 20%;
 	display: flex;
 
 	flex-direction: column;
 
-	column-gap: 10px;
+	column-gap: 1%;
 
 }
 
 .menu a{
-	align-self: center;
+	-ms-flex-align: center;
 
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-top: 2px;
+	margin-bottom: 1px;
+	margin-left: 20px;
+	margin-right: 20px;
 
-	margin-left: 10%;
-	margin-right: 10%;
+
 
 	padding-left: 25%;
 	padding-right: 25%;
-	padding-top: 10%;
-	padding-bottom: 10%;
+	padding-top: 5%;
+	padding-bottom: 5%;
 
 
 	font-size: 20px;
@@ -67,7 +70,7 @@ div{
 	text-decoration: none;
 
 	background-color: blue;
-	border-radius:10%;
+	border-radius:5%;
 	color:#ffffff;
 }
 
