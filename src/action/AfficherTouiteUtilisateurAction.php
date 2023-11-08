@@ -9,6 +9,8 @@ class AfficherTouiteUtilisateurAction extends Action{
         $id = $_GET["id"];
         $listeTouite = ListeTouite::listeTouiteUser($id);
         $rl = new RenderListe($listeTouite);
-        return $rl->render(1);
+        $html = $rl->render(1);
+        $html .= Utilisateur::utilisateurNarcissique();
+        return $html;
     }
 }
