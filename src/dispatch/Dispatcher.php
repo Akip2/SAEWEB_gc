@@ -40,6 +40,9 @@ class Dispatcher{
             case "list_touite_utilisateur":
                 $action_class=new Action\AfficherTouiteUtilisateurAction();
                 break;
+            case "sup_touite" :
+                $action_class=new Action\SupTouiteAction();
+                break;
             default:
                 $action_class = new Action\DefaultAction();
         }

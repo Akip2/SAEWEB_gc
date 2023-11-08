@@ -195,7 +195,7 @@ class Touite{
         return $render->compact();
     }
 
-    public function supprimerTweet(int $id_touite){
+    public static function supprimerTweet(int $id_touite){
         $bd=Connection\ConnectionFactory::makeConnection();
     
     

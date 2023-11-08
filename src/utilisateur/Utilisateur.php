@@ -80,15 +80,29 @@ class Utilisateur{
             return "";
         }
     }
-    public static function suivreUtilisateur(int $idUtilisateur){
+
+    public static function verifierSuivi(int $idUtilisateur) : bool{
         $bdd = ConnectionFactory::makeConnection();
-        $req = $bdd->prepare("INSERT INTO suivreUtilisateur(id_suiveur, id_suivit) VALUES ({$_SESSION["user"]->id}, $idUtilisateur");
+        $req = $bdd->prepare("SELECT count(*) as suivre where id_suiveur = ? and id_suivit = ?");
+        $req->bindParam(1, $_SESSION["user"]->id);
+        $req->bindParam(2, $idUtilisateur);
+		$req->execute();
+        $donnee = $req->fetch();
+        return $donnee["suivre"] > 0;
+    }
+    public static function suivreUtilisateur(int $idUtilisateur) : void{
+        $bdd = ConnectionFactory::makeConnection();
+        $req = $bdd->prepare("INSERT INTO suivreUtilisateur(id_suiveur, id_suivit) VALUES (?, ?)");
+        $req->bindParam(1, $_SESSION["user"]->id);
+        $req->bindParam(2, $idUtilisateur);
 		$req->execute();
     }
 
-    public static function nePlusSuivreUtilisateur(int $idUtilisateur){
+    public static function nePlusSuivreUtilisateur(int $idUtilisateur) : void{
         $bdd = ConnectionFactory::makeConnection();
-        $req = $bdd->prepare("DELETE from suivreUtilisateur where id_suiveur = {$_SESSION["user"]->id} and id_suivit = $idUtilisateur");
+        $req = $bdd->prepare("DELETE from suivreUtilisateur where id_suiveur = ? and id_suivit = ?");
+        $req->bindParam(1, $_SESSION["user"]->id);
+        $req->bindParam(2, $idUtilisateur);
 		$req->execute();
     }
 
