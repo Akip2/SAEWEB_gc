@@ -30,16 +30,9 @@ class RenderTouite implements Renderer {
         if (isset($_SESSION["user"])) {
             $u = unserialize($_SESSION["user"]);
             if ($this->touite->nom_auteur === $u->nom && $this->touite->prenom_auteur === $u->prenom){
-                $touite = "<a href=\"?action=sup_touite&idTouite=".$this->touite->id_touite."\"> 
+                $touite .= "<a href=\"?action=sup_touite&idTouite=".$this->touite->id_touite."\"> 
                 <input type=\"button\" value=\"Supprimer Touite\"> </a>";
             }
-            /*$note .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
-                    <input type='radio' name='choix' value='Dislike'> Dislike
-
-                    <button type=\"submit\">Valider</button>
-                    </form>";
-            /*$note .= "<a href=\"?action=noter&idTouite=".$this->touite->id_touite."\"> 
-            <input type=\"button\" value=\"Noter\"> </a>";*/
             $noteUtilisateur = Utilisateur::verifierAvis($this->touite->id_touite);
             if($noteUtilisateur !== 0){
                 if($noteUtilisateur > 0){
