@@ -92,7 +92,7 @@ class Touite{
         $st->bindParam(2, $id_image);
         $st->bindParam(3, $date);
 
-        $id_auteur=$_SESSION["user"]->id;
+        $id_auteur=unserialize($_SESSION["user"])->id;
         $st->bindParam(4, $id_auteur);
 
         $st->execute();

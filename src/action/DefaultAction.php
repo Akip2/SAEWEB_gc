@@ -6,7 +6,7 @@ class DefaultAction extends Action{
     public function execute() : string{
         return "<h1>Touiter</h1>
         <h2>Bienvenue !</h2>
-        <div>
+        <div class=\"menu\">
         <a href=\"index.php?action=inscription\">Ajout utilisateur</a><br>
         <a href=\"index.php?action=connexion\">Connexion</a><br>
         <a href=\"index.php?action=list_touite\">Lister les Touites</a><br>
@@ -16,7 +16,7 @@ class DefaultAction extends Action{
         <a href=\"index.php?action=list_touite_utilisateur\">Afficher Touite Utilisateur</a><br>
         <a href=\"index.php?action=follow_tag\">Suivre des tags</a><br>
         </div>
-        <div>".Touite::afficherTouiteAccueil()."</div>";
+        <div class=\"conteneur_touites\">".Touite::afficherTouiteAccueil()."</div>";
 
     }
 }
