@@ -40,4 +40,9 @@ class Auth{
 		}
 		$insertion = $bdd->exec("INSERT INTO utilisateur(nom, prenom, mail, motdepasse,role) VALUES (\"".$nom."\",\"".$prenom."\",\"".$mail."\",\"".$hash."\",1);");
 	}
+	public static function disconnection(): void{
+		if(isset($_SESSION['user'])){
+			unset($_SESSION['user']);
+		}
+	}
 }
