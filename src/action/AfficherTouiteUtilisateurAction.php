@@ -6,10 +6,8 @@ use iutnc\touiter\utilisateur\Utilisateur;
 
 class AfficherTouiteUtilisateurAction extends Action{
 	public function execute() : string{
-        $u = unserialize($_SESSION['user']);
-        $id = $u->id;
-        $user = new Utilisateur($id);
-        $listeTouite = ListeTouite::listeTouiteUser($user->mail);
+        $id = $_GET["id"];
+        $listeTouite = ListeTouite::listeTouiteUser($id);
         $rl = new RenderListe($listeTouite);
         return $rl->render(1);
     }

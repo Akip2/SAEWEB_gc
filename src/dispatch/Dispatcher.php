@@ -50,7 +50,6 @@ class Dispatcher{
             case "deconection":
                 Auth::disconnection();
                 echo "<script>alert(\"Vous êtes déconnecté\")</script>";
-                
             default:
                 $action_class = new Action\DefaultAction();
         }
