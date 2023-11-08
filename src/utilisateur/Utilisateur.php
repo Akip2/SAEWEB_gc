@@ -28,7 +28,9 @@ class Utilisateur{
         $req->bindParam(2, $idTouite);
 		$req->execute();
 		$donnee = $req->fetch();
-
+        if($donnee === false){
+            return 0;
+        }
         return intval($donnee["note"]);
     }
     public static function ajouterAvis(int $idTouite,int $note) : void{

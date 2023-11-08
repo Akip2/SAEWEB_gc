@@ -2,3 +2,4 @@
 /img
 *.lock
 *.ini
+composer.lock

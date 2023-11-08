@@ -17,6 +17,7 @@ class Touite{
     private int $id_touite;
     private string $nom_auteur;
     private string $prenom_auteur;
+    private string $id_auteur;
 
     public function __construct(int $id_touite){
         $this->id_touite=$id_touite;
@@ -42,6 +43,8 @@ class Touite{
             $this->date_publication=$data["datePubli"];
             $this->nom_auteur=$data["nom"];
             $this->prenom_auteur=$data["prenom"];
+            $this->id_auteur=$data["id_auteur"];
+
         }
         else{
             //AUCUNE LIGNE TROUVEE
@@ -63,9 +66,7 @@ class Touite{
         $id_image=null;
 
         if($img!=null){
-            $st=$bd->prepare("
-                INSERT INTO image(chemin) values(?);
-            ");
+            $st=$bd->prepare("INSERT INTO image(chemin) values(?);");
 
             $st->bindParam(1, $img);
 
