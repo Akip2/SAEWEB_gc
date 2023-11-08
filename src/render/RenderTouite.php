@@ -30,16 +30,19 @@ class RenderTouite implements Renderer {
         if (isset($_SESSION["user"])) {
             $u = unserialize($_SESSION["user"]);
             if ($this->touite->nom_auteur === $u->nom && $this->touite->prenom_auteur === $u->prenom){
-                $touite = "<a href=\"?action=sup_touite&idTouite=".$this->touite->id_touite."\"> 
+                $touite .= "<a href=\"?action=sup_touite&idTouite=".$this->touite->id_touite."\"> 
                 <input type=\"button\" value=\"Supprimer Touite\"> </a>";
-            }
-            /*$note .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
-                    <input type='radio' name='choix' value='Dislike'> Dislike
+            }else{
 
-                    <button type=\"submit\">Valider</button>
-                    </form>";
-            /*$note .= "<a href=\"?action=noter&idTouite=".$this->touite->id_touite."\"> 
-            <input type=\"button\" value=\"Noter\"> </a>";*/
+                if (Utilisateur::verifierSuivi($this->touite->id_auteur)){
+                    $touite .= "<a href=\"?action=suivre&idUtilisateur=".$this->touite->id_auteur."&suivre=1\"> 
+                    <input type=\"button\" value=\"Ne plus suivre\"> </a>";
+                }else{
+                    $touite .= "<a href=\"?action=suivre&idUtilisateur=".$this->touite->id_auteur."&suivre=0\"> 
+                    <input type=\"button\" value=\"Suivre\"> </a>";
+                }
+
+            }
             $noteUtilisateur = Utilisateur::verifierAvis($this->touite->id_touite);
             if($noteUtilisateur !== 0){
                 if($noteUtilisateur > 0){
