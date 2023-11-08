@@ -17,18 +17,18 @@ class RenderTouite implements Renderer {
     }
 
     public function compact() :string {
-        $res = "<div>".$this->touite->texte." 
-        <a href=\"index.php?action=show_touite&id=".$this->touite->id_touite."\"> voir plus </a></div><br>";
+        $res = "<p class='touite'>".$this->touite->texte." 
+        <a href=\"index.php?action=show_touite&id=".$this->touite->id_touite."\"> voir plus </a></p><br>";
         return $res;
     }
 
     public function long() :string  {
-        $res = "<div>".$this->touite->nom_auteur." ".$this->touite->prenom_auteur.
+        $res = "<p class='touite'>".$this->touite->nom_auteur." ".$this->touite->prenom_auteur.
         "<br>".$this->touite->texte.
         "<img src=\"".$this->touite->chemin_image."\"> </img> <br> 
         <a href=\"?action=noter&idTouite=".$this->touite->id_touite."\"> 
         <input type=\"button\" value=\"Noter\"> </a>";
-        //$this->touite->score."</div> <br>";
+        //$this->touite->score."</p> <br>";
         return $res;
     }
 }
