@@ -3,6 +3,7 @@
 namespace iutnc\touiter\utilisateur;
 use Exception;
 use iutnc\touiter\connection\ConnectionFactory;
+use PDOException;
 
 class Utilisateur{
     private int $id;
@@ -32,8 +33,22 @@ class Utilisateur{
     }
     public static function ajouterAvis(int $idTouite,int $note) : void{
         $bdd = ConnectionFactory::makeConnection();
-        $req = $bdd->prepare("INSERT INTO evaluation(id_touite, id_utilisateur, note) VALUES ($idTouite, {$_SESSION["user"]->id}, $note");
-		$req->execute();
+        $u = unserialize($_SESSION["user"]);
+        $req = $bdd->prepare("INSERT INTO evaluation(id_touite, id_utilisateur, note) VALUES (?, ?, ?)");
+        $req->bindParam(1, $idTouite);
+        $req->bindParam(2, $u->id);
+        $req->bindParam(3, $note);
+        try{
+            $req->execute();
+        }catch(PDOException $e){
+            $req = $bdd->prepare("UPDATE evaluation set note = ? where id_touite = ? and id_utilisateur = ?");
+            $req->bindParam(1, $note);
+            $req->bindParam(2, $idTouite);
+            $req->bindParam(3, $u->id);
+            $req->execute();
+        }
+
+		
     }
     public static function utilisateurNarcissique():string{
         if(isset($_SESSION['user'])){
