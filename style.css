@@ -1,51 +1,75 @@
 body{
-	color:rgb(231, 233, 234);
+	color:black;
 	font-family: sans-serif;
 	padding: 5px;
-	background-color: black;
-	font-family: 'Chirp';
+	background-color: white;
+	font-family: sans-serif;
 }
-
 
 div{
 	padding: 5px;
 	margin: 5px;
-	background-color: gray;
+}
+
+#conteneur_principal{
+	display: flex;
+	flex-direction:row;
+	
 }
 
 .conteneur_touites{
-	display: inline-block;
-	padding-right: 50px;
-	overflow: hidden;
+	width: 50%;
+	text-align: center;
+	margin-right: 25%;
+
+	padding-bottom: 50%;
+
 }
 .menu, .touite, .conteneur_touites{
-	display: inline-block;
-	background-color: rgb(10,10,10);
+	background-color: rgb(230,230,230);
 
 	border:solid;
-	border-color: rgb(200, 200, 200);
+	border-color: rgb(40, 40, 70);
 	border-width: 1px;
 
 	border-radius: 15px;
 }
 
+.menu{
+	width: 20%;
+	margin-left: 2%;
+}
+
+.menu a{
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+	font-size: 20px;
+}
+
 
 .touite:hover{
-	background-color: rgb(40,40,40);
+	background-color: rgb(210,210,210);
 }
 
 .touite{
-	margin: 10px 1px;
+
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+
+	margin-right: 25px;
+
 	padding:15px;
 
 	padding-top: 30px;
 	padding-bottom: 30px;
 
 	font-size: 130%;
-}
 
-div .touite{
-	word-wrap: break-word;
+	text-align: left;
+
+
 }
 
 

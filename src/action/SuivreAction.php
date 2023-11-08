@@ -3,9 +3,9 @@ namespace iutnc\touiter\action;
 
 use iutnc\touiter\utilisateur\Utilisateur;
 
-class ShowTouiteAction extends Action{
+class SuivreAction extends Action{
 	public function execute() : string{
-        if ($_GET['suivre'] === 1){
+        if (intval($_GET['suivre']) === 0){
             Utilisateur::suivreUtilisateur($_GET['idUtilisateur']);
             return "Vous vous êtes bien abonné";
         }else{

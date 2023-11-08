@@ -20,8 +20,9 @@ class DefaultAction extends Action{
         }
         return "<h1>Touiter</h1>
         <h2>Bienvenue sur Touiter!</h2>
+        <div id='conteneur_principal'>
         <div class=\"menu\">{$option}</div>
-        <div class=\"conteneur_touites\">".Touite::afficherTouiteAccueil()."</div>";
+        <div class=\"conteneur_touites\">".Touite::afficherTouiteAccueil()."</div></div>";
         
     }
 }

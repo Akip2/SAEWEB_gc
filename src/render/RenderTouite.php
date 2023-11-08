@@ -32,6 +32,16 @@ class RenderTouite implements Renderer {
             if ($this->touite->nom_auteur === $u->nom && $this->touite->prenom_auteur === $u->prenom){
                 $touite .= "<a href=\"?action=sup_touite&idTouite=".$this->touite->id_touite."\"> 
                 <input type=\"button\" value=\"Supprimer Touite\"> </a>";
+            }else{
+
+                if (Utilisateur::verifierSuivi($this->touite->id_auteur)){
+                    $touite .= "<a href=\"?action=suivre&idUtilisateur=".$this->touite->id_auteur."&suivre=1\"> 
+                    <input type=\"button\" value=\"Ne plus suivre\"> </a>";
+                }else{
+                    $touite .= "<a href=\"?action=suivre&idUtilisateur=".$this->touite->id_auteur."&suivre=0\"> 
+                    <input type=\"button\" value=\"Suivre\"> </a>";
+                }
+
             }
             $noteUtilisateur = Utilisateur::verifierAvis($this->touite->id_touite);
             if($noteUtilisateur !== 0){

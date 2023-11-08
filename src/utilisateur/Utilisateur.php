@@ -116,8 +116,9 @@ class Utilisateur{
 
     public static function verifierSuivi(int $idUtilisateur) : bool{
         $bdd = ConnectionFactory::makeConnection();
-        $req = $bdd->prepare("SELECT count(*) as suivre where id_suiveur = ? and id_suivit = ?");
-        $req->bindParam(1, $_SESSION["user"]->id);
+        $req = $bdd->prepare("SELECT count(*) as suivre from suivreUtilisateur where id_suiveur = ? and id_suivit = ?");
+        $u = unserialize($_SESSION["user"]);
+        $req->bindParam(1, $u->id);
         $req->bindParam(2, $idUtilisateur);
 		$req->execute();
         $donnee = $req->fetch();
@@ -126,7 +127,8 @@ class Utilisateur{
     public static function suivreUtilisateur(int $idUtilisateur) : void{
         $bdd = ConnectionFactory::makeConnection();
         $req = $bdd->prepare("INSERT INTO suivreUtilisateur(id_suiveur, id_suivit) VALUES (?, ?)");
-        $req->bindParam(1, $_SESSION["user"]->id);
+        $u = unserialize($_SESSION["user"]);
+        $req->bindParam(1, $u->id);
         $req->bindParam(2, $idUtilisateur);
 		$req->execute();
     }
@@ -134,7 +136,8 @@ class Utilisateur{
     public static function nePlusSuivreUtilisateur(int $idUtilisateur) : void{
         $bdd = ConnectionFactory::makeConnection();
         $req = $bdd->prepare("DELETE from suivreUtilisateur where id_suiveur = ? and id_suivit = ?");
-        $req->bindParam(1, $_SESSION["user"]->id);
+        $u = unserialize($_SESSION["user"]);
+        $req->bindParam(1, $u->id);
         $req->bindParam(2, $idUtilisateur);
 		$req->execute();
     }
