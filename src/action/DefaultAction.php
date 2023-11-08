@@ -16,8 +16,7 @@ class DefaultAction extends Action{
             $option = "</br><a href=\"index.php?action=inscription\">Inscription</a>
                 <a href=\"index.php?action=connexion\">Connexion</a>";
         }
-        return "<h1>Touiter</h1>
-        <h2>Bienvenue sur Touiter!</h2>
+        return "<h2>Bienvenue sur Touiter!</h2>
         <div id='conteneur_principal'>
         <div class=\"menu\">{$option}</div>
         <div class=\"conteneur_touites\">".Touite::afficherTouiteAccueil()."</div></div>";
