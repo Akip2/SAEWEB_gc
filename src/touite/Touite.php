@@ -63,9 +63,7 @@ class Touite{
         $id_image=null;
 
         if($img!=null){
-            $st=$bd->prepare("
-                INSERT INTO image(chemin) values(?);
-            ");
+            $st=$bd->prepare("INSERT INTO image(chemin) values(?);");
 
             $st->bindParam(1, $img);
 

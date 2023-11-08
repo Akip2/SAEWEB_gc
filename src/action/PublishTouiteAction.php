@@ -13,7 +13,8 @@ class PublishTouiteAction extends Action {
         if($this->http_method==="GET"){
             $contenu="
             <form method='post' enctype='multipart/form-data' action='?action=publish_touite'>
-                Texte : <input name='texte' type='text'>
+                <label>Texte :</label>
+                <textarea name=\"texte\" rows=\"4\" cols=\"50\" required></textarea> 
                 <input type='submit' value='Publier'>
                 <input type='file' name='image' accept='.png, .jpg, .jpeg, .gif'>
             </form>
@@ -22,29 +23,33 @@ class PublishTouiteAction extends Action {
         else if($this->http_method==="POST"){
 
             $texte=filter_var($_POST["texte"], FILTER_DEFAULT);
-            
-            //date de publication 
-            date_default_timezone_set('Europe/Paris');
-            $date_publication = date('Y-m-d H:i:s');
-            //print($date_publication);
-            
-            $touite; //Initialisation du touite
-
-            $dest=null;
-            if($_FILES["image"]["tmp_name"]!=null){
-
-                $tmp=$_FILES["image"]["tmp_name"];
-
-                $filename=uniqid();
+            if(strlen($texte)<=235){
+                //date de publication 
+                date_default_timezone_set('Europe/Paris');
+                $date_publication = date('Y-m-d H:i:s');
+                //print($date_publication);
                 
-                $dest="img/$filename.png"; //Stockage de l'image côté serveur
+                $touite; //Initialisation du touite
 
-                move_uploaded_file($tmp, $dest);
+                $dest=null;
+                if($_FILES["image"]["tmp_name"]!=null){
+
+                    $tmp=$_FILES["image"]["tmp_name"];
+
+                    $filename=uniqid();
+                    
+                    $dest="img/$filename.png"; //Stockage de l'image côté serveur
+
+                    move_uploaded_file($tmp, $dest);
+                }
+
+                //Insertion du touite
+                $touite=Touite\Touite::insererCreer($texte, $date_publication, $dest);
+                $contenu="<b>Touite publié avec succès!</b></br><p>(normalement ^^')</p>";
             }
-
-            //Insertion du touite
-            $touite=Touite\Touite::insererCreer($texte, $date_publication, $dest);
-            $contenu="<b>Touite publié avec succès!</b></br><p>(normalement ^^')</p>";
+            else{
+                $contenu="<b>Touite trop long !</b></br>";
+            }
         }
 
         return $contenu;
