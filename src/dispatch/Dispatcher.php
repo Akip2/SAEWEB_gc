@@ -2,6 +2,7 @@
 namespace iutnc\touiter\dispatch;
 
 use \iutnc\touiter\action as Action;
+use \iutnc\touiter\auth\Auth;
 
 //require_once 'vendor/autoload.php';
 
@@ -40,6 +41,9 @@ class Dispatcher{
             case "list_touite_utilisateur":
                 $action_class=new Action\AfficherTouiteUtilisateurAction();
                 break;
+            case "deconection":
+                Auth::disconnection();
+                echo "<script>alert(\"Vous êtes déconnecté\")</script>";
             default:
                 $action_class = new Action\DefaultAction();
         }
