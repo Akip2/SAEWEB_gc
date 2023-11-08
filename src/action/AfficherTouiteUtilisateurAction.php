@@ -10,7 +10,12 @@ class AfficherTouiteUtilisateurAction extends Action{
         $listeTouite = ListeTouite::listeTouiteUser($id);
         $rl = new RenderListe($listeTouite);
         $html = $rl->render(1);
-        $html .= Utilisateur::utilisateurNarcissique();
+        if(isset($_SESSION['user'])){
+            $user = unserialize($_SESSION['user']);
+            if($user->id === intval($id)){
+                $html .= Utilisateur::utilisateurNarcissique();     
+            }
+        }
         return $html;
     }
 }
