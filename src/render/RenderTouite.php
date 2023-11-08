@@ -24,7 +24,9 @@ class RenderTouite implements Renderer {
     }
 
     public function long() :string  {
-        $touite = ""; 
+        $touite = "";
+        $noteTouite = $this->touite->noteTouite();
+        $touite .="<p>Note :".$noteTouite."</p><br>";
         if (isset($_SESSION["user"])) {
             $u = unserialize($_SESSION["user"]);
             if ($this->touite->nom_auteur === $u->nom && $this->touite->prenom_auteur === $u->prenom){
@@ -38,9 +40,9 @@ class RenderTouite implements Renderer {
                     </form>";
             /*$note .= "<a href=\"?action=noter&idTouite=".$this->touite->id_touite."\"> 
             <input type=\"button\" value=\"Noter\"> </a>";*/
-            $note = Utilisateur::verifierAvis($this->touite->id_touite);
-            if($note !== 0){
-                if($note > 0){
+            $noteUtilisateur = Utilisateur::verifierAvis($this->touite->id_touite);
+            if($noteUtilisateur !== 0){
+                if($noteUtilisateur > 0){
                     $touite .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
                     <input type='radio' name='choix' value='Dislike'> Dislike
                     <button type=\"submit\">Valider</button>
