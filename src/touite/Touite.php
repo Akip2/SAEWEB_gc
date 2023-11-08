@@ -223,4 +223,16 @@ class Touite{
         $st->bindParam(1, $id_touite);
         $st->execute();
     }
+    public function noteTouite(): int{
+        $bd=Connection\ConnectionFactory::makeConnection();
+    
+        $st=$bd->prepare("SELECT SUM(evaluation.note)FROM evaluation WHERE evaluation.id_touite = :pIdTouite;");
+        $st->bindParam(":pIdTouite", $this->id_touite);
+        $st->execute();
+        $donnee = $st->fetch();
+        if($donnee === false){
+            return 0;
+        }
+        return intval($donnee[0]);
+    }
 }
