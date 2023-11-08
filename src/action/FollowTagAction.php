@@ -13,7 +13,10 @@ class FollowTagAction extends Action{
 
 		if(isset($_SESSION["user"])){
 			$bd=Connection\ConnectionFactory::makeConnection();
-			$id_utilisateur=$_SESSION["user"]->id;
+
+
+			$u=unserialize($_SESSION["user"]);
+			$id_utilisateur=$u->id;
 
 
 			if($this->http_method === "GET"){
@@ -30,16 +33,16 @@ class FollowTagAction extends Action{
 					$lib=$data["libelle"];
 					$id_tag=$data["id"];
 
-					$st=$bd->prepare("
+					$st2=$bd->prepare("
 						SELECT id_tag FROM suivretag WHERE id_suiveur=? AND id_tag=?;
 					");
-					$st->bindParam(1, $id_utilisateur);
-					$st->bindParam(2, $id_tag);
+					$st2->bindParam(1, $id_utilisateur);
+					$st2->bindParam(2, $id_tag);
 
-					$st->execute();
-					$data=$st->fetch();
+					$st2->execute();
+					$data2=$st2->fetch();
 
-					if($data==false){  //l'utilisateur n'est pas abonné au tag
+					if($data2==false){  //l'utilisateur n'est pas abonné au tag
 						$page.="$lib : <input type='checkbox' name='$id_tag'/>";
 					}
 					else{
