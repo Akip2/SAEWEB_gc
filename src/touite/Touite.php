@@ -177,6 +177,23 @@ class Touite{
         return $tags;
     }
 
+    public static function getTagId(string $tag) : int {
+        $bd=Connection\ConnectionFactory::makeConnection();
+        
+        $st=$bd->prepare("SELECT id FROM tag WHERE libelle = ?;");
+
+        $st->bindParam(1, $tag);
+
+        $st->execute();
+
+        $data=$st->fetch();
+
+        
+        return $data["id"];
+        
+
+    }
+
     public function __get( string $attr) : mixed {
         if (property_exists($this, $attr)) return $this->$attr;
         throw new Exception("$attr : invalid property");
