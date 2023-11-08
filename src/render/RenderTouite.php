@@ -23,7 +23,7 @@ class RenderTouite implements Renderer {
     }
 
     public function long() :string  {
-        $option = ""; 
+        $note = ""; 
         if (isset($_SESSION["user"])) {
             $note = "<a href=\"?action=noter&idTouite=".$this->touite->id_touite."\"> 
             <input type=\"button\" value=\"Noter\"> </a>";
