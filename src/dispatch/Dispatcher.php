@@ -41,15 +41,13 @@ class Dispatcher{
             case "list_touite_utilisateur":
                 $action_class=new Action\AfficherTouiteUtilisateurAction();
                 break;
-<<<<<<< HEAD
             case "sup_touite" :
                 $action_class=new Action\SupTouiteAction();
                 break;
-=======
+
             case "deconection":
                 Auth::disconnection();
                 echo "<script>alert(\"Vous êtes déconnecté\")</script>";
->>>>>>> 4d30196b5042bfcc267f8a5a811c054c1145d168
             default:
                 $action_class = new Action\DefaultAction();
         }

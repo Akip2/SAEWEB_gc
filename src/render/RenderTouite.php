@@ -25,16 +25,12 @@ class RenderTouite implements Renderer {
     public function long() :string  {
         $note = ""; 
         if (isset($_SESSION["user"])) {
-<<<<<<< HEAD
             $u = unserialize($_SESSION["user"]);
             if ($this->touite->nom_auteur === $u->nom && $this->touite->prenom_auteur === $u->prenom){
                 $note = "<a href=\"?action=sup_touite&idTouite=".$this->touite->id_touite."\"> 
                 <input type=\"button\" value=\"Supprimer Touite\"> </a>";
             }
             $note .= "<a href=\"?action=noter&idTouite=".$this->touite->id_touite."\"> 
-=======
-            $note = "<a href=\"?action=noter&idTouite=".$this->touite->id_touite."\"> 
->>>>>>> 4d30196b5042bfcc267f8a5a811c054c1145d168
             <input type=\"button\" value=\"Noter\"> </a>";
         }
         
