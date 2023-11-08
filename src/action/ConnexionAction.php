@@ -22,7 +22,8 @@ class ConnexionAction extends Action{
 			try{
 				Auth::authenticate($mail, $mdp);
 				$page = "<h2>Bienvenue ".$mail."</h2><br/><p>Voici vos touites:</p><br>";
-				$listeTouite = ListeTouite::listeTouiteUser($_SESSION['user']->mail);
+				$u = unserialize($_SESSION['user']);
+				$listeTouite = ListeTouite::listeTouiteUser($u->mail);
                 $rl = new RenderListe($listeTouite);
                 $page = $page.$rl->render(1);
 			}

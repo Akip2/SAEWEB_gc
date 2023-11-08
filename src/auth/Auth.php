@@ -21,7 +21,7 @@ class Auth{
 			}
 			else{
 				$u = new Utilisateur(intval($donnee["id"]), $donnee["nom"], $donnee["prenom"], $donnee["mail"], intval($donnee["role"]));
-				$_SESSION['user'] = $u;
+				$_SESSION['user'] = serialize($u);
 			}
 		}
 		else{
