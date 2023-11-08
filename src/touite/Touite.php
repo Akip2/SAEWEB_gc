@@ -265,6 +265,7 @@ class Touite{
         $st->bindParam(1, $idImage);
         $st->execute();
     }
+    
     public function noteTouite(): int{
         $bd=Connection\ConnectionFactory::makeConnection();
     

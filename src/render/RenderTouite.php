@@ -28,7 +28,7 @@ class RenderTouite implements Renderer {
         $txt = $this->touite->texte;
         foreach($tags as $index => $value) {
             $id = Touite::getTagId($value);
-            $taglien[$index] = "<a href=\"index.php?action=list_touite_tag&id=".$this->touite->id_touite."\">
+            $taglien[$index] = "<a href=\"index.php?action=list_touite_tag&id=".$id."\">
             ".$value." </a>";
         }
         $mots = explode(" ",$txt);
