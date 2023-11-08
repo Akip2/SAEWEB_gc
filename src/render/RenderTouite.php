@@ -23,11 +23,17 @@ class RenderTouite implements Renderer {
     }
 
     public function long() :string  {
-        $res="<p class='touie'><br>".$this->touite->texte.
+        $option = ""; 
+        if (isset($_SESSION["user"])) {
+            $note = "<a href=\"?action=noter&idTouite=".$this->touite->id_touite."\"> 
+            <input type=\"button\" value=\"Noter\"> </a>";
+        }
+        
+        $res = "<p class='touie'>"."<a href=\"index.php?action=list_touite_utilisateur&id=".$this->touite->id_auteur."\">
+        ".$this->touite->nom_auteur." ".$this->touite->prenom_auteur." </a><br>".
+        "<br>".$this->touite->texte.
         "<img src=\"".$this->touite->chemin_image."\"> </img> <br> 
-        <a href=\"?action=noter&idTouite=".$this->touite->id_touite."\"> 
-        <input type=\"button\" value=\"Noter\"> </a></p>";
-        //$this->touite->score."</div> <br>";
+        {$note} </p>";
         return $res;
     }
 }
