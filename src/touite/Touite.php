@@ -233,6 +233,16 @@ class Touite{
         $st->bindParam(1, $id_touite);
         $st->execute();
 
+        $st=$bd->prepare("SELECT chemin FROM image WHERE id=?");
+
+        $st->bindParam(1, $idImage);
+        $st->execute();
+
+        $donnee = $st->fetch();
+        $cheminImg =  $donnee['chemin'];
+
+        unlink($cheminImg);
+
         $st=$bd->prepare("DELETE FROM image WHERE id=?");
 
         $st->bindParam(1, $idImage);
