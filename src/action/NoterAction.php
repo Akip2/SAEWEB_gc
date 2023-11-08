@@ -3,7 +3,7 @@ namespace iutnc\touiter\action;
 use iutnc\touiter\utilisateur\Utilisateur;
 class NoterAction extends Action {
     public function execute() : string{
-        if($this->http_method === "GET"){
+        /*if($this->http_method === "GET"){
             $note = Utilisateur::verifierAvis($_GET["idTouite"]);
             if($note !== 0){
                 if($note > 0){
@@ -25,8 +25,8 @@ class NoterAction extends Action {
                             <button type=\"submit\">Valider</button>
                             </form>";
             }
-		}
-		elseif($this->http_method === "POST"){
+		}*/
+		if($this->http_method === "POST"){
             $page = "<h1> Vous avez donné votre avis merci !</h1>";
             if($_POST["choix"] === "Like"){
                 Utilisateur::ajouterAvis(intval($_GET["idTouite"]),1);
