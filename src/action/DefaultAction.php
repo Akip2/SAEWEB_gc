@@ -10,7 +10,7 @@ class DefaultAction extends Action{
             <a href=\"index.php?action=deconection\">Se déconnecter</a><br>";
         }
         return "<h1>Touiter</h1>
-        <h2>Bienvenue !</h2>
+        <h2>Bienvenue sur Touiter!</h2>
         <div class=\"menu\">
         <a href=\"index.php?action=inscription\">Ajout utilisateur</a><br>
         <a href=\"index.php?action=connexion\">Connexion</a><br>
