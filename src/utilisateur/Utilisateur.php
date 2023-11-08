@@ -82,18 +82,32 @@ class Utilisateur{
                 $html = $html."<li>".$donnee["prenom"]." ".$donnee["nom"]."</li>";
             }
             $html= $html."</ul><br><p>Moyenne de vos touite:</p>";
-            $reqNbTouite = $bdd->prepare("");
+            $reqNbTouite = $bdd->prepare("SELECT COUNT(touite.id_auteur) FROM touite WHERE touite.id_auteur = :pidUtilisateur;");
+            $reqNbTouite->bindParam(":pidUtilisateur", $u->id);
             $reqNbTouite->execute();
             $donnee = $req->fetch();
-            $nbTouite = intval($donnee[0]);
-            $reqSommeTouite = $bdd->prepare("SELECT evaluation.note FROM evaluation
-                INNER JOIN touite ON evaluation.id_touite = touite.id
-                WHERE touite.id_auteur = :pidUtilisateur;");
-            $reqSommeTouite->bindParam(":pidUtilisateur", $_SESSION['user']->id);
-            $reqSommeTouite->execute();
-            $donnee = $reqSommeTouite->fetch();
-            $sommeTouite = intval($donnee[0]);
-            $html = $html."<h4>".($sommeTouite/$nbTouite)."</h4>";
+            if($donnee ===false){
+                $nbTouite = 0;    
+            }
+            else{
+                $nbTouite = intval($donnee[0]);
+            }
+            if($nbTouite !== 0){
+                $reqSommeTouite = $bdd->prepare("SELECT evaluation.note FROM evaluation
+                    INNER JOIN touite ON evaluation.id_touite = touite.id
+                    WHERE touite.id_auteur = :pidUtilisateur;");
+                $reqSommeTouite->bindParam(":pidUtilisateur", $u->id);
+                $reqSommeTouite->execute();
+                if($donnee ===false){
+                    $sommeTouite = 0;    
+                }
+                else{
+                    $sommeTouite = intval($donnee[0]);
+                }
+                $donnee = $reqSommeTouite->fetch();
+                $sommeTouite = intval($donnee[0]);
+                $html = $html."<h4>".($sommeTouite/$nbTouite)."</h4>";
+            }
             return $html;
         }else{
             return "";
