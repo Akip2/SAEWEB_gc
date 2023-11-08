@@ -20,7 +20,7 @@ class Auth{
 				throw new AuthException("invalid motdepasse");
 			}
 			else{
-				$u = new Utilisateur(intval($donnee["id"]), $donnee["nom"], $donnee["prenom"], $donnee["mail"], intval($donnee["role"]));
+				$u = new Utilisateur(intval($donnee["id"]));
 				$_SESSION['user'] = serialize($u);
 			}
 		}
