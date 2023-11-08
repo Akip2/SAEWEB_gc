@@ -44,14 +44,12 @@ class Dispatcher{
             case "sup_touite" :
                 $action_class=new Action\SupTouiteAction();
                 break;
-
-            case "deconection":
-                Auth::disconnection();
-                echo "<script>alert(\"Vous êtes déconnecté\")</script>";
-
             case "suivre":
                 $action_class=new Action\SuivreAction();
                 break;
+            case "deconection":
+                Auth::disconnection();
+                echo "<script>alert(\"Vous êtes déconnecté\")</script>";
                 
             default:
                 $action_class = new Action\DefaultAction();

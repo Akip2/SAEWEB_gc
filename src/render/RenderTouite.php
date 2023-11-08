@@ -18,9 +18,29 @@ class RenderTouite implements Renderer {
     }
 
     public function compact() :string {
-        $res = "<p class='touite'>".$this->touite->texte." 
+        $res = "<p class='touite'>".$this->TexttoTag($this->touite->texte)." 
         <a href=\"index.php?action=show_touite&id=".$this->touite->id_touite."\"> voir plus </a></p><br>";
         return $res;
+    }
+
+    public function TexttoTag(string $texte) : string {
+        $tags = Touite::getTags($texte);
+        $txt = $this->touite->texte;
+        foreach($tags as $index => $value) {
+            $id = Touite::getTagId($value);
+            $taglien[$index] = "<a href=\"index.php?action=list_touite_tag&id=".$this->touite->id_touite."\">
+            ".$value." </a>";
+        }
+        $mots = explode(" ",$txt);
+        foreach($mots as $indexMots => $valueMots) {
+            foreach($tags as $indexTags => $valueTags)  {
+                if ($valueMots === $valueTags) {
+                    $mots[$indexMots] = $taglien[$indexTags];
+                }
+            }
+        }
+        $txt = implode(" ",$mots);
+        return $txt;
     }
 
     public function long() :string  {
@@ -68,7 +88,7 @@ class RenderTouite implements Renderer {
         
         $res = "<p class='touie'>"."<a href=\"index.php?action=list_touite_utilisateur&id=".$this->touite->id_auteur."\">
         ".$this->touite->nom_auteur." ".$this->touite->prenom_auteur." </a><br>".
-        "<br>".$this->touite->texte.
+        "<br>".$this->TexttoTag($this->touite->texte).
         "<img src=\"".$this->touite->chemin_image."\"> </img> <br> 
         {$touite} </p>";
         return $res;
