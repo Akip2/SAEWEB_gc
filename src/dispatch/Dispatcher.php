@@ -47,6 +47,9 @@ class Dispatcher{
             case "suivre":
                 $action_class=new Action\SuivreAction();
                 break;
+            case "list_touite_tag": 
+                $action_class=new Action\AfficherTouiteTagAction();
+                break;
             case "deconection":
                 Auth::disconnection();
                 echo "<script>alert(\"Vous êtes déconnecté\")</script>";

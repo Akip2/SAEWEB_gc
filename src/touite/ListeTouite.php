@@ -27,12 +27,13 @@ class ListeTouite{
 
     public static function listeTouiteTag(int $id) : ListeTouite {
         $bd=ConnectionFactory::makeConnection();
+        $listes = new ListeTouite("Touites concernant ce tag");
         $st=$bd->prepare("
-           Select touite.id from tag ta inner join touite2tag tt 
-                inner join on ta.id = tt.id_tag 
-                inner join touite to on to.id = tt.id_touite
-                left join image on image.id = to.id_image
-                where ta.id = ? order by datePubli DESC;
+        Select touite.id from tag inner join touite2tag 
+        on tag.id = touite2tag.id_tag 
+        inner join touite on touite.id = touite2tag.id_touite
+        left join image on image.id = touite.id_image
+        where tag.id = ? order by datePubli DESC;
         ");
 
         $st->bindParam(1, $id);
