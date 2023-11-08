@@ -85,14 +85,14 @@ class Utilisateur{
             $reqNbTouite = $bdd->prepare("SELECT COUNT(touite.id_auteur) FROM touite WHERE touite.id_auteur = :pidUtilisateur;");
             $reqNbTouite->bindParam(":pidUtilisateur", $u->id);
             $reqNbTouite->execute();
-            $donnee = $req->fetch();
+            $donnee = $reqNbTouite->fetch();
             if($donnee === false){
                 $nbTouite = 0;    
             }
             else{
                 $nbTouite = intval($donnee[0]);
             }
-            //print($nbTouite);
+            //var_dump($donnee);
             if($nbTouite !== 0){
                 $reqSommeTouite = $bdd->prepare("SELECT evaluation.note FROM evaluation
                     INNER JOIN touite ON evaluation.id_touite = touite.id
@@ -107,7 +107,7 @@ class Utilisateur{
                 }
                 $donnee = $reqSommeTouite->fetch();
                 $sommeTouite = intval($donnee[0]);
-                $html = $html."<h4>".($sommeTouite/$nbTouite)." likes par touite </h4>";
+                $html = $html."<p>".($sommeTouite/$nbTouite)." likes par touite </p>";
             }
             return $html;
         }else{
