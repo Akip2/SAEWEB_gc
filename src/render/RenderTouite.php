@@ -46,7 +46,7 @@ class RenderTouite implements Renderer {
     public function long() :string  {
         $touite = "";
         $noteTouite = $this->touite->noteTouite();
-        $touite .="<p>Like :".$noteTouite."</p>";
+        $touite .="<p>Like : ".$noteTouite."</p>";
         if (isset($_SESSION["user"])) {
             $u = unserialize($_SESSION["user"]);
             if ($this->touite->nom_auteur === $u->nom && $this->touite->prenom_auteur === $u->prenom){
@@ -66,20 +66,20 @@ class RenderTouite implements Renderer {
             if($noteUtilisateur !== 0){
                 if($noteUtilisateur > 0){
                     $touite .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
-                    <input type='radio' name='choix' value='Dislike'> Dislike
+                    <input  class=\"Dislike\" type='radio' name='choix' value='Dislike' id=\"dislike\"> <label class=\"Dislike\" for=\"dislike\">Dislike</label>
                     <button type=\"submit\">Valider</button>
                     </form>";
                 }else{
                     $touite .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
-                    <input type='radio' name='choix' value='Like'> Like
+                    <input class=\"Like\" type='radio' name='choix' value='Like' id=\"like\"> <label class=\"Like\" for=\"like\">Like</label>
                     <button type=\"submit\">Valider</button>
                     </form>";
 
                 }  
             }else{
                 $touite .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
-                            <input type='radio' name='choix' value='Like'> Like
-                            <input type='radio' name='choix' value='Dislike'> Dislike
+                            <input type='radio' name='choix' value='Like' id=\"like\"> <label class=\"Like\" for=\"like\">Like</label>
+                            <input type='radio' name='choix' value='Dislike' id=\"dislike\"> <label class=\"Dislike\" for=\"dislike\">Dislike</label>
                             <button type=\"submit\">Valider</button>
                             </form>";
             }

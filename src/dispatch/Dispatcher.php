@@ -69,7 +69,7 @@ class Dispatcher{
             <meta charset=\"utf-8\">
             <title>Touiter</title>
             <link rel=\"stylesheet\" href=\"style.css\">
-        </head><body><h1 style=\"text-align:center;\">Touiter</h1>".$html."<br><br><a href=\"?home\"><button>Accueil</button></a></body></html>";
+        </head><body><h1 style=\"text-align:center;\">Touiter</h1>".$html."<br><br>\n<a href=\"?home\"><button>Accueil</button></a>\n</body>\n</html>";
         print $page;
     }
 }

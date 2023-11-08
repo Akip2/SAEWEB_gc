@@ -126,3 +126,10 @@ button{
 	margin: 0.5%;
 	border: none;
 }
+
+.Like{
+	color: green;
+}
+.Dislike{
+	color: red;
+}
