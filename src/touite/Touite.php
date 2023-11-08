@@ -194,4 +194,26 @@ class Touite{
         $render = new RenderListe($listeTouite);
         return $render->compact();
     }
+
+    public function supprimerTweet(int $id_touite){
+        $bd=Connection\ConnectionFactory::makeConnection();
+    
+    
+        //Supression dans la table touite2tag
+        $st=$bd->prepare("
+            DELETE FROM touite2tag WHERE id_touite=?
+        ");
+    
+        $st->bindParam(1, $id_touite);
+        $st->execute();
+    
+    
+        //Supression dans la table touite
+        $st=$bd->prepare("
+            DELETE FROM touite WHERE id=?
+        ");
+    
+        $st->bindParam(1, $id_touite);
+        $st->execute();
+    }
 }

@@ -23,12 +23,11 @@ class RenderTouite implements Renderer {
     }
 
     public function long() :string  {
-        $res = "<p class='touite'>".$this->touite->nom_auteur." ".$this->touite->prenom_auteur.
-        "<br>".$this->touite->texte.
+        $res="<p class='touie'><br>".$this->touite->texte.
         "<img src=\"".$this->touite->chemin_image."\"> </img> <br> 
         <a href=\"?action=noter&idTouite=".$this->touite->id_touite."\"> 
-        <input type=\"button\" value=\"Noter\"> </a>";
-        //$this->touite->score."</p> <br>";
+        <input type=\"button\" value=\"Noter\"> </a></p>";
+        //$this->touite->score."</div> <br>";
         return $res;
     }
 }
