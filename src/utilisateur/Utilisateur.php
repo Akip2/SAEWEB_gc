@@ -77,7 +77,7 @@ class Utilisateur{
             $req->bindParam(":pidUtilisateur", $u->id);
             $req->execute();
             
-            $html ="<p>Vos suiveurs:</p></br><ul>\n";
+            $html ="<p>Vos suiveurs:</p><ul>\n";
             while($donnee = $req->fetch()) {
                 $html = $html."<li>".$donnee["prenom"]." ".$donnee["nom"]."</li>";
             }
@@ -86,12 +86,13 @@ class Utilisateur{
             $reqNbTouite->bindParam(":pidUtilisateur", $u->id);
             $reqNbTouite->execute();
             $donnee = $req->fetch();
-            if($donnee ===false){
+            if($donnee === false){
                 $nbTouite = 0;    
             }
             else{
                 $nbTouite = intval($donnee[0]);
             }
+            //print($nbTouite);
             if($nbTouite !== 0){
                 $reqSommeTouite = $bdd->prepare("SELECT evaluation.note FROM evaluation
                     INNER JOIN touite ON evaluation.id_touite = touite.id
@@ -106,7 +107,7 @@ class Utilisateur{
                 }
                 $donnee = $reqSommeTouite->fetch();
                 $sommeTouite = intval($donnee[0]);
-                $html = $html."<h4>".($sommeTouite/$nbTouite)."</h4>";
+                $html = $html."<h4>".($sommeTouite/$nbTouite)." likes par touite </h4>";
             }
             return $html;
         }else{

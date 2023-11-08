@@ -14,10 +14,7 @@ class DefaultAction extends Action{
         }
         else{
             $option = "</br><a href=\"index.php?action=inscription\">Inscription</a>
-                <a href=\"index.php?action=connexion\">Connexion</a>
-                <a href=\"index.php?action=list_touite\">Lister les Touites</a>
-                <a href=\"index.php?action=list_user_touite\">Touites d'une Personne</a>
-                <a href=\"index.php?action=list_tag_touite\">Touites d'un tag</a></br>";
+                <a href=\"index.php?action=connexion\">Connexion</a>";
         }
         return "<h1>Touiter</h1>
         <h2>Bienvenue sur Touiter!</h2>
