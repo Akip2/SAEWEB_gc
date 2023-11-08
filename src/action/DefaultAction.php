@@ -6,8 +6,9 @@ class DefaultAction extends Action{
     public function execute() : string{
         $option = ""; 
         if (isset($_SESSION["user"])) {   //Si authentifié
+            $u = unserialize($_SESSION["user"]);
             $option = "<a href=\"index.php?action=publish_touite\">Publier un touite</a><br>
-            <a href=\"index.php?action=list_touite_utilisateur\">Afficher Touite Utilisateur</a><br>
+            <a href=\"index.php?action=list_touite_utilisateur&id=$u->id\">Profil</a><br>
             <a href=\"index.php?action=follow_tag\">Suivre des tags</a><br>
             <a href=\"index.php?action=deconection\">Se déconnecter</a><br>";
         }
