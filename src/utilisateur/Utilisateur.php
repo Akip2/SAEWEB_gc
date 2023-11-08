@@ -12,12 +12,29 @@ class Utilisateur{
     private string $mail;
     private int $role;
 
-    public function __construct(int $id, string $n, string $p, string $m, int $r){
-        $this->id = $id;
-        $this->nom = $n;
-        $this->prenom = $p;
-        $this->mail = $m;
-        $this->role = $r;
+    public function __construct(int $id){
+        $this->id=$id;
+
+        $bd=ConnectionFactory::makeConnection();
+
+        $st=$bd->prepare("
+            SELECT nom, prenom, mail, role FROM utilisateur
+            WHERE id=?;
+        ");
+
+        $st->bindParam(1, $id);
+
+        $st->execute();
+
+        $data=$st->fetch();
+
+        if($data!=false){
+            $this->nom=$data["nom"];
+            $this->prenom=$data["prenom"];
+            $this->mail=$data["mail"];
+            $this->role=$data["role"];
+        }
+    
     }
 
     public static function verifierAvis(int $idTouite): int{
@@ -28,7 +45,9 @@ class Utilisateur{
         $req->bindParam(2, $idTouite);
 		$req->execute();
 		$donnee = $req->fetch();
-
+        if($donnee === false){
+            return 0;
+        }
         return intval($donnee["note"]);
     }
     public static function ajouterAvis(int $idTouite,int $note) : void{

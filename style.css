@@ -1,7 +1,11 @@
 body{
+	color:rgb(231, 233, 234);
 	font-family: sans-serif;
 	padding: 5px;
+	background-color: black;
+	font-family: 'Chirp';
 }
+
 
 div{
 	padding: 5px;
@@ -11,10 +15,41 @@ div{
 
 .conteneur_touites{
 	display: inline-block;
+	padding-right: 50px;
+	overflow: hidden;
 }
-.menu{
+.menu, .touite, .conteneur_touites{
 	display: inline-block;
+	background-color: rgb(10,10,10);
+
+	border:solid;
+	border-color: rgb(200, 200, 200);
+	border-width: 1px;
+
+	border-radius: 15px;
 }
+
+
+.touite:hover{
+	background-color: rgb(40,40,40);
+}
+
+.touite{
+	margin: 10px 1px;
+	padding:15px;
+
+	padding-top: 30px;
+	padding-bottom: 30px;
+
+	font-size: 130%;
+}
+
+div .touite{
+	word-wrap: break-word;
+}
+
+
+
 
 button{
 	background-color: blue;

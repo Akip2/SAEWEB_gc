@@ -17,27 +17,32 @@ class RenderTouite implements Renderer {
     }
 
     public function compact() :string {
-        $res = "<div>".$this->touite->texte." 
-        <a href=\"index.php?action=show_touite&id=".$this->touite->id_touite."\"> voir plus </a></div><br>";
+        $res = "<p class='touite'>".$this->touite->texte." 
+        <a href=\"index.php?action=show_touite&id=".$this->touite->id_touite."\"> voir plus </a></p><br>";
         return $res;
     }
 
     public function long() :string  {
-        $option = ""; 
+        $note = ""; 
         if (isset($_SESSION["user"])) {
+<<<<<<< HEAD
             $u = unserialize($_SESSION["user"]);
             if ($this->touite->nom_auteur === $u->nom && $this->touite->prenom_auteur === $u->prenom){
-                $option = "<a href=\"?action=sup_touite&idTouite=".$this->touite->id_touite."\"> 
+                $note = "<a href=\"?action=sup_touite&idTouite=".$this->touite->id_touite."\"> 
                 <input type=\"button\" value=\"Supprimer Touite\"> </a>";
             }
-            $option .= "<a href=\"?action=noter&idTouite=".$this->touite->id_touite."\"> 
+            $note .= "<a href=\"?action=noter&idTouite=".$this->touite->id_touite."\"> 
+=======
+            $note = "<a href=\"?action=noter&idTouite=".$this->touite->id_touite."\"> 
+>>>>>>> 4d30196b5042bfcc267f8a5a811c054c1145d168
             <input type=\"button\" value=\"Noter\"> </a>";
         }
-        $res = "<div>".$this->touite->nom_auteur." ".$this->touite->prenom_auteur.
+        
+        $res = "<p class='touie'>"."<a href=\"index.php?action=list_touite_utilisateur&id=".$this->touite->id_auteur."\">
+        ".$this->touite->nom_auteur." ".$this->touite->prenom_auteur." </a><br>".
         "<br>".$this->touite->texte.
         "<img src=\"".$this->touite->chemin_image."\"> </img> <br> 
-        {$option}";
-        //$this->touite->score."</div> <br>";
+        {$note} </p>";
         return $res;
     }
 }
