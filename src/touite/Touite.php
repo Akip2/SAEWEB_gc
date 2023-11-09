@@ -232,7 +232,7 @@ class Touite{
         $req->execute();
 
         while($donnee = $req->fetch()){
-            if (in_array(intval($donnee[0]) ,$listeTouite->liste)){
+            if (!in_array(new Touite(intval($donnee[0])) ,$listeTouite->liste)){
                 $listeTouite->ajouterTouite(new Touite(intval($donnee[0])));
             }
         }
