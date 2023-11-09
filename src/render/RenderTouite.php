@@ -19,7 +19,7 @@ class RenderTouite implements Renderer {
 
     public function compact() :string {
         $res = "<p class='touite'>".$this->TexttoTag($this->touite->texte)." 
-        <a href=\"index.php?action=show_touite&id=".$this->touite->id_touite."\"> voir plus </a></p><br>";
+        <a class=\"voirPlus\" href=\"index.php?action=show_touite&id=".$this->touite->id_touite."\"> voir plus </a></p><br>";
         return $res;
     }
 

@@ -13,7 +13,7 @@ class DefaultAction extends Action{
             <a href=\"index.php?action=deconection\">Se déconnecter</a><br>";
         }
         else{
-            $option = "</br><a href=\"index.php?action=inscription\">Inscription</a>
+            $option = "<br><a href=\"index.php?action=inscription\">Inscription</a>
                 <a href=\"index.php?action=connexion\">Connexion</a>";
         }
         return "<h2>Bienvenue sur Touiter!</h2>
