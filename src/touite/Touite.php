@@ -296,14 +296,17 @@ FROM (
         $st->execute();
 
         $donnee = $st->fetch();
-        $cheminImg =  $donnee['chemin'];
 
-        unlink($cheminImg);
+        if(isset($donne["chemin"])){
+            $cheminImg =  $donnee['chemin'];
 
-        $st=$bd->prepare("DELETE FROM image WHERE id=?");
+            unlink($cheminImg);
 
-        $st->bindParam(1, $idImage);
-        $st->execute();
+            $st=$bd->prepare("DELETE FROM image WHERE id=?");
+
+            $st->bindParam(1, $idImage);
+            $st->execute();
+        }
     }
     
     public function noteTouite(): int{
