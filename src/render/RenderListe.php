@@ -40,6 +40,9 @@ class RenderListe implements Renderer {
             if (isset($_GET["action"])) {
                 $action = "action=".$_GET["action"]."&";
             }
+            else{
+                $action = "";
+            }
             $pageprec = $pvalue -1;
             $pagesuiv = $pvalue +1;
             if ($pvalue > 0) {
