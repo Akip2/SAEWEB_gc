@@ -48,6 +48,8 @@ class RenderListe implements Renderer {
             if ($pvalue < $nbpage-1) {
                 $boutons = $boutons."<a class=\"nomUtilisateurTouite\" href=\"index.php?".$action.$id."page=".$pagesuiv."\"> Page suivante </a>";
             }
+        } else {
+            $page = $this->touites;
         }
         $res = $this->touites->name."<br> ";
         foreach($page->liste as $value) {
