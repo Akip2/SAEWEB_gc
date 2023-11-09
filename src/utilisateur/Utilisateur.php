@@ -107,7 +107,7 @@ class Utilisateur{
                 }
                 $donnee = $reqSommeTouite->fetch();
                 $sommeTouite = intval($donnee[0]);
-                $html = $html.($sommeTouite/$nbTouite)." likes par touite </p>";
+                $html = $html.(round($sommeTouite/$nbTouite, 2))." likes par touite </p>";
             }
             return $html."</div>";
         }else{
