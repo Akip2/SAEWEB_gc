@@ -8,15 +8,15 @@ use iutnc\touiter\auth\AuthException;
 class InscriptionAction extends Action{
 	public function execute() : string{
 		if($this->http_method === "GET"){
-				$page = "<form id=\"inscription\" method=\"POST\" action=\"?action=inscription\"/>
+				$page = "<form id=\"inscription\" method=\"POST\" action=\"?action=inscription\">
 				<p>Veuillez renseigner votre mail</p>  
-				<input type=\"email\" name=\"mail\"/><br>
+				<input class=\"inputPass\" type=\"email\" name=\"mail\" placeholder=\"votre mail\" required/><br>
 				<p>Veuillez renseigner votre nom et votre prenom</p>
-				<input type=\"text\" name=\"nom\"/>
-				<input type=\"text\" name=\"prenom\"/><br>
+				<input class=\"inputPass\" type=\"text\" name=\"nom\" placeholder=\"votre nom\" required/>
+				<input class=\"inputPass\" type=\"text\" name=\"prenom\" placeholder=\"votre prenom\" required/><br>
 				<p>Veuillez renseigner votre mot de passe</p>
-				<input type=\"password\" name=\"mdp1\"/>
-				<input type=\"password\" name=\"mdp2\"/><br>
+				<input class=\"inputPass\" type=\"password\" name=\"mdp1\" placeholder=\"mot de passe\" required/>
+				<input class=\"inputPass\" type=\"password\" name=\"mdp2\" placeholder=\"mot de passe\" required/><br>
 				<button type=\"submit\">Valider</button>
 				</form>";
 		}

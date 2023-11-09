@@ -136,6 +136,8 @@ button{
 
 .inputPass{
 	border-radius:42px;
+	border-color: black;
+	border-width: 1px;
 	padding:8px 34px;
 	width: 15%;
 	margin: 0.5%;
