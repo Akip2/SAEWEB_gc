@@ -85,9 +85,9 @@ class RenderTouite implements Renderer {
             }
         }
         
-        $res = "<p class='touite'>"."<a class=\"nomUtilisateurTouite\" href=\"index.php?action=list_touite_utilisateur&id=".$this->touite->id_auteur."\">
+        $res = "<div class='touite'><a class=\"nomUtilisateurTouite\" href=\"index.php?action=list_touite_utilisateur&id=".$this->touite->id_auteur."\">
         ".$this->touite->nom_auteur." ".$this->touite->prenom_auteur." </a><br>".
-        "<br>".$this->TexttoTag($this->touite->texte)."<img src=\"".$this->touite->chemin_image."\"> <br> 
+        "<br><p>".$this->TexttoTag($this->touite->texte)."</p><div class=\"conteneur_image\"><img sizes=\"(max-width: 600px) 480px,800px\" src=\"".$this->touite->chemin_image."\"></div></div> <br> 
         {$touite}";
         return $res;
     }
