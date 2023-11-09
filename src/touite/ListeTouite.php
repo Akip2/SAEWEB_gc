@@ -27,7 +27,7 @@ class ListeTouite{
 
     public static function listeTouiteTag(int $id) : ListeTouite {
         $bd=ConnectionFactory::makeConnection();
-        $listes = new ListeTouite("Touites concernant ce tag");
+        $listes = new ListeTouite("Tous les touites de ce tag.");
         $st=$bd->prepare("
         Select touite.id from tag inner join touite2tag 
         on tag.id = touite2tag.id_tag 

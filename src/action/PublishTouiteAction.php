@@ -2,6 +2,8 @@
 namespace iutnc\touiter\action;
 use iutnc\touiter\touite as Touite;
 
+use iutnc\touiter\render as Render;
+
 require_once "Action.php";
 
 
@@ -11,7 +13,16 @@ class PublishTouiteAction extends Action {
     public function execute() : string{
         $contenu;
         if($this->http_method==="GET"){
+
+            $menu=Render\RenderMenu::render();
+
             $contenu="
+            
+
+            <div id='conteneur_principal'>
+            <div class=\"menu\">{$menu}</div>
+
+            <div id='conteneur_reste'>
             <h3>Publier un touite</h3>
             <p>(limite de 235 caractères)</p>
             <form method='post' enctype='multipart/form-data' action='?action=publish_touite'>
@@ -23,6 +34,9 @@ class PublishTouiteAction extends Action {
                 </div>
 
             </form>
+            </div>
+
+            </div>
             ";
         }
         else if($this->http_method==="POST"){
@@ -49,7 +63,14 @@ class PublishTouiteAction extends Action {
 
             //Insertion du touite
             $touite=Touite\Touite::insererCreer($texte, $date_publication, $dest);
-            $contenu="<b>Touite publié avec succès!</b></p>";
+
+            $menu=Render\RenderMenu::render();
+            $contenu="
+                <div id='conteneur_principal'>
+                <div class=\"menu\">{$menu}</div>
+                <div id='conteneur_reste'><b>Touite publié avec succès!</b></p></div>
+                </div>
+            ";
         }
 
         return $contenu;

@@ -14,20 +14,22 @@ div{
 #conteneur_principal{
 	display: flex;
 	flex-direction:row;
+
 	
 }
 
 .conteneur_touites{
-	width: 50%;
+	max-width: 40%;
+	min-width: 40%;
 	text-align: center;
-	margin-right: 25%;
+	margin-right: 5%;
 
 	padding-bottom: 2%;
 }
 .conteneur_touites_general{
 	width: 50%;
 	text-align: center;
-	margin-right: 25%;
+	margin-right: 5%;
 	margin-left: 25%;
 
 	padding-bottom: 2%;
@@ -46,11 +48,14 @@ div{
 .menu{
 	white-space: nowrap;
 	overflow: hidden;
-	width: 25%;
+	max-width: 25%;
+	min-width: 25%;
 	display: flex;
 	text-align: center;
 
 	flex-direction: column;
+
+	margin-right: 5%;
 
 
 }
@@ -89,6 +94,8 @@ div{
 }
 
 .touite{
+
+	min-width:20%;
 
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -144,6 +151,10 @@ div{
 	color:#ffffff;
 }
 
+
+#noter{
+	width: 25%;
+}
 
 
 

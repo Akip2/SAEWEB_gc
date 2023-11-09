@@ -7,8 +7,11 @@ use iutnc\touiter\auth\AuthException;
 
 use iutnc\touiter\connection as Connection;
 
+use iutnc\touiter\render\RenderMenu;
+
 class FollowTagAction extends Action{
 	public function execute() : string{
+		$menu=RenderMenu::render();
 
 
 		if(isset($_SESSION["user"])){
@@ -26,7 +29,7 @@ class FollowTagAction extends Action{
 				");
 				$st->execute();
 
-				$page="<form id='suivreTag' method='POST' action='?action=follow_tag'>";
+				$page="<div id='conteneur_principal'><div class='menu'>$menu</div><form id='suivreTag' method='POST' action='?action=follow_tag'>";
 
 
 				while($data=$st->fetch()){
@@ -51,7 +54,7 @@ class FollowTagAction extends Action{
 					$page.="</br>";
 				}
 
-				$page .= "<input type='submit' class='bouton' value='Enregistrer mes préférences'/></form>";
+				$page .= "<input type='submit' class='bouton' value='Enregistrer mes préférences'/></form></div>";
 			}
 			elseif($this->http_method === "POST"){
 
@@ -101,8 +104,13 @@ class FollowTagAction extends Action{
 						$remove_statement->execute();
 					}
 				}
-
-				$page="<p>Vos préférences ont été enregistrées</p>";
+				
+				$page="
+					<div id='conteneur_principal'>
+					<div class='menu'>$menu</div>
+					<p>Vos préférences ont été enregistrées</p>
+					</div>
+				";
 			}
 		}
 		else{

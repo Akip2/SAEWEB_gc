@@ -64,6 +64,8 @@ class RenderTouite implements Renderer {
 
             }
             $noteUtilisateur = Utilisateur::verifierAvis($this->touite->id_touite);
+
+            $touite.="</br>";
             if($noteUtilisateur !== 0){
                 if($noteUtilisateur > 0){  //Utilisateur a liké
                     $touite .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
