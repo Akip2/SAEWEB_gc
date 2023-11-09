@@ -66,7 +66,7 @@ class RenderTouite implements Renderer {
             if($noteUtilisateur !== 0){
                 if($noteUtilisateur > 0){  //Utilisateur a liké
                     $touite .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
-                    <input type='submit' class='bouton' id='prefremover' name='removeLike' value='Retirer like'>
+                    <input type='submit' class='bouton' id='prefRemover' name='removeLike' value='Retirer like'>
                     <input type='submit' class='bouton' id='dislike' name='dislike' value='Dislike'>
                     </form>";
                 }else{  //Utilisateur a disliké
