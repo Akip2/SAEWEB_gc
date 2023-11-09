@@ -12,11 +12,15 @@ class PublishTouiteAction extends Action {
         $contenu;
         if($this->http_method==="GET"){
             $contenu="
+            <h3>Publier un touite</h3>
             <form method='post' enctype='multipart/form-data' action='?action=publish_touite'>
-                <label>Texte :</label>
-                <textarea name=\"texte\" rows=\"4\" cols=\"50\" required></textarea> 
-                <input type='submit' value='Publier'>
-                <input type='file' name='image' accept='.png, .jpg, .jpeg, .gif'>
+                <textarea name=\"texte\" rows=\"4\" cols=\"50\" placeholder=\"Votre touite\" required></textarea> 
+                <input class=\"bouton\" type='submit' value='Publier'><br>
+                <div class=\"labelUpload\">
+                    <label for=\"upload\">Mettre une image dans le touite : </label>
+                    <input id=\"upload\" type='file' name='image' accept='.png, .jpg, .jpeg, .gif'>
+                </div>
+
             </form>
             ";
         }

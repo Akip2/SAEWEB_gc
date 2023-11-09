@@ -79,7 +79,7 @@ div{
 .menuStats{
 	white-space: nowrap;
 	overflow: hidden;
-	width: 20%;
+	width: 30%;
 	display: flex;
 
 	background-color: rgb(230,230,230);
@@ -185,6 +185,7 @@ div{
 .inputPass{
 	border-radius:42px;
 	border-color: black;
+	border: solid;
 	border-width: 1px;
 	padding:8px 34px;
 	width: 15%;
@@ -194,4 +195,19 @@ div{
 img{
 	max-height: 256px;
 	max-width: 512px;
+}
+
+.labelUpload{
+	font-size: 8px;
+	background-color: lightgray;
+	width: 45%;
+	border-radius: 15px;
+}
+
+textarea{	
+	border-radius: 15px;
+	border-width: 1px;
+	border-color: black;
+	padding: 5px;
+	border: solid;
 }
