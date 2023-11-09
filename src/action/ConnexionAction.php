@@ -10,9 +10,9 @@ use iutnc\touiter\render\RenderListe;
 class ConnexionAction extends Action{
 	public function execute() : string{
 		if($this->http_method === "GET"){
-			$page = "<form id=\"connexionUtilisateur\" method=\"POST\" action=\"?action=connexion\"/>  
-			<input type=\"email\" name=\"mail\"/><br/>
-			<input type=\"password\" name=\"mdp\"/><br/>
+			$page = "<h2>Connexion</h2><form id=\"connexionUtilisateur\" method=\"POST\" action=\"?action=connexion\"/>  
+			<input class=\"inputPass\" type=\"email\" name=\"mail\" placeholder=\"votre mail\" required/><br/>
+			<input class=\"inputPass\" type=\"password\" name=\"mdp\" placeholder=\"mot de passe\" required/><br/>
 			<button type=\"submit\">Valider</button>
 			</form>";
 		}

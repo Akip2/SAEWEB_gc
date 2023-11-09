@@ -133,3 +133,10 @@ button{
 .Dislike{
 	color: red;
 }
+
+.inputPass{
+	border-radius:42px;
+	padding:8px 34px;
+	width: 15%;
+	margin: 0.5%;
+}
