@@ -31,11 +31,15 @@ class Auth{
 	public static function register(string $nom, string $prenom, string $mail, string $passwd): void{
 		$hash = password_hash($passwd, PASSWORD_DEFAULT, ["cost" => 12]);
 		$bdd = ConnectionFactory::makeConnection();
-		$req = $bdd->prepare("SELECT COUNT(mail) FROM utilisateur WHERE mail LIKE :pemail;");
-		$req->bindParam(":pemail", $mail);
+		
+		$req = $bdd->prepare("SELECT mail FROM utilisateur WHERE mail=?;");
+		$req->bindParam(1, $mail);
 		$req->execute();
 		$donnee = $req->fetch();
-		if(!($donnee[0] === 0)){
+
+		//var_dump($donnee);
+
+		if($donnee!==false){
 			throw new AuthException;
 		}
 		$insertion = $bdd->exec("INSERT INTO utilisateur(nom, prenom, mail, motdepasse,role) VALUES (\"".$nom."\",\"".$prenom."\",\"".$mail."\",\"".$hash."\",1);");
