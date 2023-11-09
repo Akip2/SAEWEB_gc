@@ -94,6 +94,24 @@ div{
 
 }
 
+.nomUtilisateurTouite{
+	text-align: center;
+
+	margin-top: 2px;
+	margin-bottom: 1px;
+	margin-left: 5px;
+	margin-right: 5px;
+
+	padding: 5px;
+
+	text-decoration: none;
+	color: black;
+
+	
+	background-color: darkgray;
+	border-radius: 10%;
+}
+
 .voirPlus{
 	text-align: center;
 
