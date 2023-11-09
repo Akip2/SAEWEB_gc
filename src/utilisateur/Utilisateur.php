@@ -106,7 +106,6 @@ class Utilisateur{
                 else{
                     $sommeTouite = intval($donnee[0]);
                 }
-                $
                 $sommeTouite = intval($donnee[0]);
                 $html = $html.(round($sommeTouite/$nbTouite, 2))." likes par touite </p>";
             }
