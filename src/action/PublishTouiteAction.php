@@ -49,7 +49,7 @@ class PublishTouiteAction extends Action {
 
                 //Insertion du touite
                 $touite=Touite\Touite::insererCreer($texte, $date_publication, $dest);
-                $contenu="<b>Touite publié avec succès!</b></br><p>(normalement ^^')</p>";
+                $contenu="<b>Touite publié avec succès!</b></p>";
             }
             else{
                 $contenu="<b>Touite trop long !</b></br>";
