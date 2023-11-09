@@ -25,7 +25,7 @@ div{
 	padding-bottom: 2%;
 
 }
-.menu, .touite, .conteneur_touites{
+.menu, .touite, .conteneur_touites, .menuStats{
 	background-color: rgb(230,230,230);
 
 	border:solid;
@@ -75,25 +75,6 @@ div{
 
 }
 
-
-.menuStats{
-	white-space: nowrap;
-	overflow: hidden;
-	width: 30%;
-	display: flex;
-
-	background-color: rgb(230,230,230);
-
-	border:solid;
-	border-color: rgb(40, 40, 70);
-	border-width: 1px;
-
-	border-radius: 15px;
-
-	flex-direction: column;
-
-	padding-left: 10px;
-}
 
 .touite:hover{
 	background-color: rgb(200,200,200);
