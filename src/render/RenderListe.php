@@ -48,7 +48,7 @@ class RenderListe implements Renderer {
             if ($pvalue > 0) {
                 $boutons = "<a class=\"nomUtilisateurTouite\" href=\"index.php?".$action.$id."page=".$pageprec."\">  Page précédente </a>" ;
             } 
-            if ($pvalue < $nbpage-1) {
+            if ($pvalue < $nbpage-2) {
                 $boutons = $boutons."<a class=\"nomUtilisateurTouite\" href=\"index.php?".$action.$id."page=".$pagesuiv."\"> Page suivante </a>";
             }
         } else {
