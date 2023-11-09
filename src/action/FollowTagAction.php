@@ -51,7 +51,7 @@ class FollowTagAction extends Action{
 					$page.="</br>";
 				}
 
-				$page .= "<input type='submit' value='Enregistrer mes préférences'/></form>";
+				$page .= "<input type='submit' class='bouton' value='Enregistrer mes préférences'/></form>";
 			}
 			elseif($this->http_method === "POST"){
 
