@@ -81,7 +81,7 @@ class Utilisateur{
             while($donnee = $req->fetch()) {
                 $html = $html."<li>".$donnee["prenom"]." ".$donnee["nom"]."</li>";
             }
-            $html= $html."</ul><br><p>Moyenne de vos touite:\n";
+            $html= $html."</ul><br><p>Moyenne de vos touites:\n";
             $reqNbTouite = $bdd->prepare("SELECT COUNT(touite.id_auteur) FROM touite WHERE touite.id_auteur = :pidUtilisateur;");
             $reqNbTouite->bindParam(":pidUtilisateur", $u->id);
             $reqNbTouite->execute();
