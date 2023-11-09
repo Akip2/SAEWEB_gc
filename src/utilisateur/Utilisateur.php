@@ -86,7 +86,7 @@ class Utilisateur{
             $reqNbTouite->bindParam(":pidUtilisateur", $u->id);
             $reqNbTouite->execute();
             $donnee = $reqNbTouite->fetch();
-            if($donnee === false){
+            if($donnee == false || is_null($donnee)){
                 $nbTouite = 0;    
             }
             else{
@@ -99,13 +99,14 @@ class Utilisateur{
                     WHERE touite.id_auteur = :pidUtilisateur;");
                 $reqSommeTouite->bindParam(":pidUtilisateur", $u->id);
                 $reqSommeTouite->execute();
-                if($donnee ===false){
+                $donnee = $reqSommeTouite->fetch();
+                if($donnee == false || is_null($donnee)){
                     $sommeTouite = 0;    
                 }
                 else{
                     $sommeTouite = intval($donnee[0]);
                 }
-                $donnee = $reqSommeTouite->fetch();
+                $
                 $sommeTouite = intval($donnee[0]);
                 $html = $html.(round($sommeTouite/$nbTouite, 2))." likes par touite </p>";
             }

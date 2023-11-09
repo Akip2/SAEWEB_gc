@@ -54,10 +54,10 @@ class RenderTouite implements Renderer {
             }else{
 
                 if (Utilisateur::verifierSuivi($this->touite->id_auteur)){
-                    $touite .= "<a href=\"?action=suivre&idUtilisateur=".$this->touite->id_auteur."&suivre=1\"> 
+                    $suivreUtilisateur = "<a href=\"?action=suivre&idUtilisateur=".$this->touite->id_auteur."&suivre=1\"> 
                     <input class=\"bouton\" type=\"button\" value=\"Ne plus suivre\"> </a>";
                 }else{
-                    $touite .= "<a href=\"?action=suivre&idUtilisateur=".$this->touite->id_auteur."&suivre=0\"> 
+                    $suivreUtilisateur = "<a href=\"?action=suivre&idUtilisateur=".$this->touite->id_auteur."&suivre=0\"> 
                     <input class=\"bouton\" type=\"button\" value=\"Suivre\"> </a>";
                 }
 
@@ -85,7 +85,7 @@ class RenderTouite implements Renderer {
         }
         
         $res = "<div class='touite'><a class=\"nomUtilisateurTouite\" href=\"index.php?action=list_touite_utilisateur&id=".$this->touite->id_auteur."\">
-        ".$this->touite->nom_auteur." ".$this->touite->prenom_auteur." </a><br>".
+        ".$this->touite->nom_auteur." ".$this->touite->prenom_auteur." </a>".$suivreUtilisateur."<br>".
         "<br><p>".$this->TexttoTag($this->touite->texte)."</p><div class=\"conteneur_image\"><img sizes=\"(max-width: 600px) 480px,800px\" src=\"".$this->touite->chemin_image."\"></div></div> <br> 
         {$touite}";
         return $res;
