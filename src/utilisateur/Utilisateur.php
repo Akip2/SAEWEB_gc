@@ -81,7 +81,7 @@ class Utilisateur{
             while($donnee = $req->fetch()) {
                 $html = $html."<li>".$donnee["prenom"]." ".$donnee["nom"]."</li>";
             }
-            $html= $html."</ul><br><p>Moyenne de vos touite:</p>";
+            $html= $html."</ul><br><p>Moyenne de vos touite:\n";
             $reqNbTouite = $bdd->prepare("SELECT COUNT(touite.id_auteur) FROM touite WHERE touite.id_auteur = :pidUtilisateur;");
             $reqNbTouite->bindParam(":pidUtilisateur", $u->id);
             $reqNbTouite->execute();
@@ -107,7 +107,7 @@ class Utilisateur{
                 }
                 $donnee = $reqSommeTouite->fetch();
                 $sommeTouite = intval($donnee[0]);
-                $html = $html."<p>".($sommeTouite/$nbTouite)." likes par touite </p>";
+                $html = $html.($sommeTouite/$nbTouite)." likes par touite </p>";
             }
             return $html."</div>";
         }else{

@@ -12,20 +12,20 @@ class AfficherTouiteUtilisateurAction extends Action{
         if(isset($_SESSION['user'])){
             $user = unserialize($_SESSION['user']);
             if($user->id === intval($id)){
-                $html = "<h2>Bienvenue sur votre profil ".$user->prenom." ".$user->nom."</h2>";
-                $html .= $rl->render(1);
-                $html .= Utilisateur::utilisateurNarcissique();     
+                $html = "<h2>Bienvenue sur votre profil ".$user->prenom." ".$user->nom."</h2><div class=\"conteneur_principal\">";
+                $html .= "<div class=\"conteneur_touites\">".$rl->render(1)."</div>";
+                $html .= Utilisateur::utilisateurNarcissique()."\n</div>";     
             }
             else{
                 $user = new Utilisateur(intval($id));
-                $html = "<h2>Bienvenue sur le profil de ".$user->prenom." ".$user->nom."</h2><br>";
-                $html .= $rl->render(1);
+                $html = "<h2>Bienvenue sur le profil de ".$user->prenom." ".$user->nom."</h2><br><div class=\"conteneur_principal\">";
+                $html .= "<div class=\"conteneur_touites\">".$rl->render(1)."</div>\n</div>";
             }
         }
         else{
             $user = new Utilisateur(intval($id));
-            $html = "<h2>Bienvenue sur le profil de ".$user->prenom." ".$user->nom."</h2><br>";
-            $html .= $rl->render(1);
+            $html = "<h2>Bienvenue sur le profil de ".$user->prenom." ".$user->nom."</h2><br><div class=\"conteneur_principal\">";
+            $html .= "<div class=\"conteneur_touites\">".$rl->render(1)."</div>\n</div>";
         }
         return $html;
     }
