@@ -20,6 +20,7 @@ class RenderListe implements Renderer {
 
     public function compact() {
         $array = $this->touites->liste;
+        $boutons = "";
         $nbtouites = sizeof($array);
         if($nbtouites > 10) {
             $nbpage = $nbtouites % 10 + 1;
@@ -41,7 +42,6 @@ class RenderListe implements Renderer {
             }
             $pageprec = $pvalue -1;
             $pagesuiv = $pvalue +1;
-            $boutons = "";
             if ($pvalue > 0) {
                 $boutons = "<a class=\"nomUtilisateurTouite\" href=\"index.php?".$action.$id."page=".$pageprec."\">  Page précédente </a>" ;
             } 
