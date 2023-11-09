@@ -14,7 +14,7 @@ class DefaultAction extends Action{
             <a href=\"index.php?action=deconection\">Se déconnecter</a><br>";
             return "
             <div id='conteneur_principal'>
-            <div class=\"menu\">{$option}</div>;
+            <div class=\"menu\">{$option}</div>
             <div class=\"conteneur_touites\">".Touite::afficherMurAccueil()."</div></div>";
         }
         else{

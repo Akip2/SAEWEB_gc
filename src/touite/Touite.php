@@ -215,21 +215,33 @@ class Touite{
 
     public static function afficherMurAccueil(): string{
         $bd=Connection\ConnectionFactory::makeConnection();
-        $req = $bd->prepare("SELECT id from touite where id_auteur IN ( select id_suivit from suivreUtilisateur where id_suiveur = ?) ORDER BY touite.datePubli DESC ;");
+
+        $req = $bd->prepare("SELECT id, datePubli
+FROM (
+    SELECT id, datePubli
+    FROM touite
+    WHERE id_auteur IN (
+        SELECT id_suivit
+        FROM suivreUtilisateur
+        WHERE id_suiveur = ?
+    )
+    UNION
+    SELECT id_touite, datePubli
+    FROM touite2tag
+    INNER JOIN touite ON touite.id = touite2tag.id_touite
+    WHERE id_tag IN (
+        SELECT id_tag
+        FROM suivretag
+        WHERE id_suiveur = ?
+    )
+) AS tempTable order by tempTable.datePubli DESC;");
+
         $idu = unserialize($_SESSION['user'])->id;
         $req->bindParam(1, $idu);
+        $req->bindParam(2, $idu);
         $req->execute();
         
         $listeTouite = new ListeTouite("<h4>Votre Mur</h4>");
-
-        while($donnee = $req->fetch()){
-            $listeTouite->ajouterTouite(new Touite(intval($donnee[0])));
-        }
-
-        $req = $bd->prepare("SELECT id_touite from touite2tag inner join touite on touite.id = touite2tag.id_touite where id_tag in (SELECT id_tag from suivretag where id_suiveur = ?) ORDER BY touite.datePubli DESC;");
-        $idu = unserialize($_SESSION['user'])->id;
-        $req->bindParam(1, $idu);
-        $req->execute();
 
         while($donnee = $req->fetch()){
             if (!in_array(new Touite(intval($donnee[0])) ,$listeTouite->liste)){
