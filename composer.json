@@ -2,7 +2,8 @@
     "autoload" : 
     {
         "psr-4" :{
-            "iutnc\\touiter\\" : "./src"
+            "iutnc\\touiter\\" : "./src",
+            "iutnc\\backOfficeTouiter\\" : "./srcBack"
         }
     }
 }
