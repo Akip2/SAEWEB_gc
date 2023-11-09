@@ -175,11 +175,27 @@ div{
 	border: none;
 }
 
-.Like{
-	color: green;
+#like{
+	background-color: green;
 }
-.Dislike{
-	color: red;
+#dislike{
+	background-color: red;
+}
+
+#like:hover{
+	background-color: rgb(20,255,20);
+}
+
+#dislike:hover{
+	background-color: rgb(255,40,40);
+}
+
+#prefRemover{
+	background-color: gray;
+}
+
+#prefRemover:hover{
+	background-color: rgb(150, 150, 150);
 }
 
 .inputPass{

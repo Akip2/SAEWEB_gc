@@ -50,6 +50,9 @@ class Dispatcher{
             case "list_touite_tag": 
                 $action_class=new Action\AfficherTouiteTagAction();
                 break;
+            case "rechercher_tous_touites": 
+                $action_class=new Action\AfficherTousTouiteAction();
+                break;
             case "deconection":
                 Auth::disconnection();
                 echo "<script>alert(\"Vous êtes déconnecté\")</script>";
