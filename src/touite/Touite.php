@@ -204,7 +204,7 @@ class Touite{
         $req = $bd->prepare("SELECT touite.id, touite.text, utilisateur.prenom, utilisateur.nom FROM touite INNER JOIN utilisateur ON touite.id_auteur = utilisateur.id ORDER BY touite.datePubli DESC;");
         $req->execute();
         
-        $listeTouite = new ListeTouite("Touite Accueil");
+        $listeTouite = new ListeTouite("<h4>Touites Accueil</h4>");
 
         while($donnee = $req->fetch()){
             $listeTouite->ajouterTouite(new Touite(intval($donnee[0])));

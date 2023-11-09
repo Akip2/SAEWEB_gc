@@ -49,7 +49,7 @@ class ListeTouite{
 
         $bd=ConnectionFactory::makeConnection();
         $u = new Utilisateur($user);
-        $listes = new ListeTouite("Touites de l'utilisateur : ".$u->mail);
+        $listes = new ListeTouite("Voici les touites : ");
         $st=$bd->prepare("
             Select touite.id from touite 
                 inner join utilisateur on touite.id_auteur = utilisateur.id  
