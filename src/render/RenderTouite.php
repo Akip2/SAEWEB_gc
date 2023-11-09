@@ -47,6 +47,7 @@ class RenderTouite implements Renderer {
         $touite = "";
         $noteTouite = $this->touite->noteTouite();
         $touite .="<p>Like : ".$noteTouite."</p>";
+        $suivreUtilisateur = "";
         if (isset($_SESSION["user"])) {
             $u = unserialize($_SESSION["user"]);
             if ($this->touite->nom_auteur === $u->nom && $this->touite->prenom_auteur === $u->prenom){
