@@ -46,7 +46,7 @@ class RenderTouite implements Renderer {
     public function long() :string  {
         $touite = "";
         $noteTouite = $this->touite->noteTouite();
-        $touite .="<p>Like : ".$noteTouite."</p>";
+        $touite .="<p>Score: ".$noteTouite."</p>";
         $suivreUtilisateur = "";
         if (isset($_SESSION["user"])) {
             $u = unserialize($_SESSION["user"]);
