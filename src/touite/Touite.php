@@ -213,6 +213,32 @@ class Touite{
         return $render->compact();
     }
 
+    public static function afficherMurAccueil(): string{
+        $bd=Connection\ConnectionFactory::makeConnection();
+        $req = $bd->prepare("SELECT id from touite where id_auteur = ( select id_suivit from suivreUtilisateur where id_suiveur = ?);");
+        $idu = unserialize($_SESSION['user'])->id;
+        $req->bindParam(1, $idu);
+        $req->execute();
+        
+        $listeTouite = new ListeTouite("<h4>Votre Mur</h4>");
+
+        while($donnee = $req->fetch()){
+            $listeTouite->ajouterTouite(new Touite(intval($donnee[0])));
+        }
+
+        $req = $bd->prepare("SELECT id_touite from touite2tag where id_tag = (SELECT id_tag from suivretag where id_suiveur = ?);");
+        $idu = unserialize($_SESSION['user'])->id;
+        $req->bindParam(1, $idu);
+        $req->execute();
+
+        while($donnee = $req->fetch()){
+            $listeTouite->ajouterTouite(new Touite(intval($donnee[0])));
+        }
+
+        $render = new RenderListe($listeTouite);
+        return $render->compact();
+    }
+
     public static function supprimerTweet(int $id_touite){
         $bd=Connection\ConnectionFactory::makeConnection();
 
