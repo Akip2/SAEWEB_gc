@@ -77,7 +77,7 @@ class Utilisateur{
             $req->bindParam(":pidUtilisateur", $u->id);
             $req->execute();
             
-            $html ="<p>Vos suiveurs:</p><ul>\n";
+            $html ="<div class=\"menuStats\"><p>Vos suiveurs:</p><ul>\n";
             while($donnee = $req->fetch()) {
                 $html = $html."<li>".$donnee["prenom"]." ".$donnee["nom"]."</li>";
             }
@@ -109,7 +109,7 @@ class Utilisateur{
                 $sommeTouite = intval($donnee[0]);
                 $html = $html."<p>".($sommeTouite/$nbTouite)." likes par touite </p>";
             }
-            return $html;
+            return $html."</div>";
         }else{
             return "";
         }
