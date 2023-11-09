@@ -64,23 +64,22 @@ class RenderTouite implements Renderer {
             }
             $noteUtilisateur = Utilisateur::verifierAvis($this->touite->id_touite);
             if($noteUtilisateur !== 0){
-                if($noteUtilisateur > 0){
+                if($noteUtilisateur > 0){  //Utilisateur a liké
                     $touite .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
-                    <input  class=\"Dislike\" type='radio' name='choix' value='Dislike' id=\"dislike\"> <label class=\"Dislike\" for=\"dislike\">Dislike</label>
-                    <button type=\"submit\">Valider</button>
+                    <input type='submit' class='bouton' id='prefremover' name='removeLike' value='Retirer like'>
+                    <input type='submit' class='bouton' id='dislike' name='dislike' value='Dislike'>
                     </form>";
-                }else{
+                }else{  //Utilisateur a disliké
                     $touite .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
-                    <input class=\"Like\" type='radio' name='choix' value='Like' id=\"like\"> <label class=\"Like\" for=\"like\">Like</label>
-                    <button type=\"submit\">Valider</button>
+                    <input type='submit' class='bouton' id='like' name='like' value='Like'>
+                    <input type='submit' class='bouton' id='prefRemover' name='removeDislike' value='Retirer dislike'>
                     </form>";
 
                 }  
             }else{
                 $touite .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
-                            <input type='radio' name='choix' value='Like' id=\"like\"> <label class=\"Like\" for=\"like\">Like</label>
-                            <input type='radio' name='choix' value='Dislike' id=\"dislike\"> <label class=\"Dislike\" for=\"dislike\">Dislike</label>
-                            <button type=\"submit\">Valider</button>
+                            <input type='submit' class='bouton' id='like' name='like' value='Like'>
+                            <input type='submit' class='bouton' id='dislike' name='dislike' value='Dislike'>
                             </form>";
             }
         }
