@@ -19,11 +19,42 @@ class RenderListe implements Renderer {
     }
 
     public function compact() {
+        $array = $this->touites->liste;
+        $nbtouites = sizeof($array);
+        if($nbtouites > 10) {
+            $nbpage = $nbtouites % 10 + 1;
+            $page = New ListeTouite($this->touites->name);
+            if (!isset($_GET["page"])) {
+                $pvalue = 0;
+            } else {
+                $pvalue = $_GET["page"];
+            }
+            for ($i = $pvalue*10; $i<min(($pvalue+1)*10,$nbtouites); $i++) {
+                $page->ajouterTouite($array[$i]);
+            }
+            $id = "";
+            if(isset($_GET["id"])) {
+                $id = "id=".$_GET["id"]."&";
+            }
+            if (isset($_GET["action"])) {
+                $action = "action=".$_GET["action"]."&";
+            }
+            $pageprec = $pvalue -1;
+            $pagesuiv = $pvalue +1;
+            $boutons = "";
+            if ($pvalue > 0) {
+                $boutons = "<a class=\"nomUtilisateurTouite\" href=\"index.php?".$action.$id."page=".$pageprec."\">  Page précédente </a>" ;
+            } 
+            if ($pvalue < $nbpage-1) {
+                $boutons = $boutons."<a class=\"nomUtilisateurTouite\" href=\"index.php?".$action.$id."page=".$pagesuiv."\"> Page suivante </a>";
+            }
+        }
         $res = $this->touites->name."<br> ";
-        foreach($this->touites->liste as $value) {
+        foreach($page->liste as $value) {
             $render = new renderTouite($value);
             $res = $res.$render->render(1);
         }
+        $res = $res.$boutons;
         return $res;
     }
 }
