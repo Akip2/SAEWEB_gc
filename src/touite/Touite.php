@@ -215,7 +215,7 @@ class Touite{
 
     public static function afficherMurAccueil(): string{
         $bd=Connection\ConnectionFactory::makeConnection();
-        $req = $bd->prepare("SELECT id from touite where id_auteur = ( select id_suivit from suivreUtilisateur where id_suiveur = ?);");
+        $req = $bd->prepare("SELECT id from touite where id_auteur = ( select id_suivit from suivreUtilisateur where id_suiveur = ?) ORDER BY touite.datePubli DESC;");
         $idu = unserialize($_SESSION['user'])->id;
         $req->bindParam(1, $idu);
         $req->execute();
@@ -226,7 +226,7 @@ class Touite{
             $listeTouite->ajouterTouite(new Touite(intval($donnee[0])));
         }
 
-        $req = $bd->prepare("SELECT id_touite from touite2tag where id_tag = (SELECT id_tag from suivretag where id_suiveur = ?);");
+        $req = $bd->prepare("SELECT id_touite from touite2tag inner join touite on touite.id = touite2tag.id_touite where id_tag = (SELECT id_tag from suivretag where id_suiveur = ?) ORDER BY touite.datePubli DESC;");
         $idu = unserialize($_SESSION['user'])->id;
         $req->bindParam(1, $idu);
         $req->execute();
