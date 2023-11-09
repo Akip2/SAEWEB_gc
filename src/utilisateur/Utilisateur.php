@@ -94,7 +94,7 @@ class Utilisateur{
             }
             //var_dump($donnee);
             if($nbTouite !== 0){
-                $reqSommeTouite = $bdd->prepare("SELECT evaluation.note FROM evaluation
+                $reqSommeTouite = $bdd->prepare("SELECT SUM(evaluation.note) FROM evaluation
                     INNER JOIN touite ON evaluation.id_touite = touite.id
                     WHERE touite.id_auteur = :pidUtilisateur;");
                 $reqSommeTouite->bindParam(":pidUtilisateur", $u->id);
