@@ -13,7 +13,7 @@ class Auth{
 		$req->execute();
 		$donnee = $req->fetch();
 		//var_dump($donnee);
-		if(!is_null($donnee["motdepasse"])){
+		if($donnee!==false){
 			//$hash = password_hash($passwd, PASSWORD_DEFAULT, ["cost" => 12]);
 			//print($hash."   <br>".$donnee["passwd"]);
 			if(!password_verify($passwd, $donnee["motdepasse"])){
