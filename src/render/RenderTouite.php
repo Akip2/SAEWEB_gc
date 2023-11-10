@@ -36,7 +36,6 @@ class RenderTouite implements Renderer {
                 $taglien[$index] = "<a href=\"index.php?action=list_touite_tag&id=".$id."\">
                 ".$value." </a>";
             }
-            echo filter_var("<", FILTER_SANITIZE_SPECIAL_CHARS);
         }
         $mots = explode(" ",$texte);
         foreach($mots as $indexMots => $valueMots) {
