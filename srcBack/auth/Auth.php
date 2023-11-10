@@ -37,8 +37,9 @@ class Auth{
 		$req->bindParam(":pemail", $mail);
 		$req->execute();
 		$donnee = $req->fetch();
-		if(!($donnee[0] === 0)){
-			throw new AuthException;
+		if(!(intval($donnee[0]) === 0)){
+			//echo $donnee[0];
+			throw new AuthException("L'admin existe déjà");
 		}
 		$insertion = $bdd->exec("INSERT INTO utilisateur(nom, prenom, mail, motdepasse,role) VALUES (\"".$nom."\",\"".$prenom."\",\"".$mail."\",\"".$hash."\",100);");
 	}

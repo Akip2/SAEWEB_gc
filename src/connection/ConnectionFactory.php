@@ -13,7 +13,7 @@ class ConnectionFactory{
 
     public static function makeConnection(){
         if(isset(self::$connexion)===false){
-            self::$connexion=new \PDO(self::$config["driver"].":host=".self::$config["hostname"].";dbname=".self::$config["dbname"], "root", "");
+            self::$connexion=new \PDO(self::$config["driver"].":host=".self::$config["hostname"].";dbname=".self::$config["dbname"], self::$config["user"], self::$config["pass"]);
         }
 
         return self::$connexion;

@@ -34,6 +34,9 @@ class AfficherTouiteUtilisateurAction extends Action{
             }
         }
         else{
+            $menu="<br><a href=\"index.php?action=inscription\">Inscription</a>
+            <a href=\"index.php?action=connexion\">Connexion</a>";
+
             $user = new Utilisateur(intval($id));
             $html = "<h2>Bienvenue sur le profil de ".$user->prenom." ".$user->nom."</h2><br><div id=\"conteneur_principal\">";
             $html.="<div class=\"menu\">{$menu}</div>";

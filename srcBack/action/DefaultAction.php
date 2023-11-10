@@ -14,7 +14,7 @@ class DefaultAction extends Action{
             }
         }
         else{
-            $page = "<a href=\"back-office.php?action=connexion\">Connexion</a>";    
+            $page = "<a href=\"back_office.php?action=connexion\">Connexion</a>";    
         }
         return $page;
         

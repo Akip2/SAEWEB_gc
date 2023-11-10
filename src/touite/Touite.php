@@ -168,7 +168,10 @@ class Touite{
             else{
                 if($istag){
                     if($caractere==" "){ //Fin du tag
-                        $tags[]=$tag;
+
+                        if(!preg_match("#[\d]#", $tag)){
+                            $tags[]=$tag;
+                        }
                         $tag="";
                         $istag=false;
                     }
@@ -179,7 +182,7 @@ class Touite{
             }
         }
 
-        if($tag!=" " && $tag!=""){ //Reperage d'un potentiel tag en fin de texte
+        if($tag!=" " && $tag!="" && !preg_match("#[\d]#", $tag)){ //Reperage d'un potentiel tag en fin de texte
             $tags[]=$tag;
         }
 
@@ -197,7 +200,12 @@ class Touite{
 
         $data=$st->fetch();
 
-        return $data["id"];
+        if($data===false){
+            return null;
+        }
+        else{
+            return $data["id"];
+        }
         
 
     }
