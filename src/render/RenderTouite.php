@@ -38,12 +38,16 @@ class RenderTouite implements Renderer {
             }
         }
         $mots = explode(" ",$texte);
-        foreach($mots as $indexMots => $valueMots) {
-            foreach($tags as $indexTags => $valueTags)  {
-                if ($valueMots === $valueTags) {
-                    $mots[$indexMots] = $taglien[$indexTags];
+        if (isset($taglien)) {
+            foreach($mots as $indexMots => $valueMots) {
+                foreach($tags as $indexTags => $valueTags)  {
+                    if ($valueMots === $valueTags) {
+                        $mots[$indexMots] = $taglien[$indexTags];
+                    }
                 }
             }
+        } else {
+            return $texte;
         }
         $txt = implode(" ",$mots);
         return $txt;
