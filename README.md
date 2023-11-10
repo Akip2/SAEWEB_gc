@@ -43,7 +43,7 @@ Notre application Touiter propose à un utilisateur non connecté à un compte d
 
 ### Problème de la page
 
-- Problème d'affichage possible du logo sur des navigateurs comme Firefox.
+- N'est pas responsive.
  
 #### Les fonctionnalités pour les administrateurs
 
