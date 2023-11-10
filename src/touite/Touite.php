@@ -7,6 +7,7 @@ use iutnc\touiter\connection as Connection;
 use iutnc\touiter\tag as Tag;
 use iutnc\touiter\touite\ListeTouite;
 use iutnc\touiter\render\RenderListe;
+use PDOException;
 
 class Touite{
     private string $texte;
@@ -137,8 +138,11 @@ class Touite{
 
             $st->bindParam(1, $id_touite);
             $st->bindParam(2, $id_tag);
-
-            $st->execute();
+            try {
+                $st->execute();
+            } catch (PDOException) {
+                
+            }
         }
 
         return new Touite($id_touite);
