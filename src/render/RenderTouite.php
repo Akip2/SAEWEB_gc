@@ -55,7 +55,7 @@ class RenderTouite implements Renderer {
         if (isset($_SESSION["user"])) {
             $u = unserialize($_SESSION["user"]);
 
-            if(isset($_POST["suivre"])) {
+            if(isset($_GET["suivre"])) {
                 if (intval($_GET['suivre']) === 0){
                     Utilisateur::suivreUtilisateur($_GET['idUtilisateur']);
                 }else{
