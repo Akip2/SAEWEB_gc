@@ -15,7 +15,7 @@ $bdo=ConnectionFactory::makeConnection();
 $dispatcher=new Dispatcher();
 
 try {
-	Auth::register("Dechezlepretre", "Luc", "luc.dechezlepretre@etu.univ-lorraine.fr", "12345");	
+	Auth::register("ROOT", "Admin", "admin@root.com", "root");	
 } catch (AuthException $e) {
 	
 }
