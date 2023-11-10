@@ -13,17 +13,20 @@ class AfficherTouiteUtilisateurAction extends Action{
         $listeTouite = ListeTouite::listeTouiteUser($id);
         $rl = new RenderListe($listeTouite);
 
-        $menu=Render\RenderMenu::render();
 
         if(isset($_SESSION['user'])){
             $user = unserialize($_SESSION['user']);
+
+            $menu=Render\RenderMenu::render();
             if($user->id === intval($id)){
+
                 $html = "<h2>Bienvenue sur votre profil ".$user->prenom." ".$user->nom."</h2><div id=\"conteneur_principal\">";
                 $html.="<div class=\"menu\">{$menu}</div>";
                 $html .= "<div class=\"conteneur_touites\">".$rl->render(1)."</div>";
                 $html .= Utilisateur::utilisateurNarcissique()."\n</div>";     
             }
             else{
+                
                 $user = new Utilisateur(intval($id));
                 $html = "<h2>Bienvenue sur le profil de ".$user->prenom." ".$user->nom."</h2><br><div id=\"conteneur_principal\">";
                 $html.="<div class=\"menu\">{$menu}</div>";
