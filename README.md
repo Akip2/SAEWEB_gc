@@ -44,3 +44,14 @@
 
 - CSS : Antoine, Luc
 - Logo : Robin
+
+## Données pour le fonctionnement de l'application
+### Compte utilisateur
+-
+-
+### Compte administrateur
+-
+
+## Présentation de l'application
+
+Notre application Touiter propose à un utilisateur non connecté à un compte de pouvoir consulter l'entièreté des touites présent sur la plateforme. Il peut aussi s'inscrire ou se connecter à un compte. Une fois connecté l'utilisateur peut publier un touite, 
