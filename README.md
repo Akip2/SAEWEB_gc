@@ -40,6 +40,10 @@ Notre application Touiter propose à un utilisateur non connecté à un compte d
 14. S’abonner à un tag : Antoine
 15. L’utilisateur narcissique : Luc
 16. Associer une image à un touite : Antoine
+
+### Problème de la page
+
+- Problème d'affichage possible du logo sur des navigateurs comme Firefox.
  
 #### Les fonctionnalités pour les administrateurs
 
@@ -54,6 +58,7 @@ Notre application Touiter propose à un utilisateur non connecté à un compte d
 
 ## Données pour le fonctionnement de l'application 
 ### Compte utilisateur
+
 - email : user1@example.com      mot de pass : 1234
 - john.doe@gmail.com       mot de pass : john15
 - alice_smith@yahoo.com       mot de pass : AéZe5f
@@ -61,4 +66,5 @@ Notre application Touiter propose à un utilisateur non connecté à un compte d
 - random_user@domain.com       mot de pass : 123456789
 
 ### Compte administrateur
+
 - email : admin@root.com      mot de pass : root
