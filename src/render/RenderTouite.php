@@ -18,20 +18,24 @@ class RenderTouite implements Renderer {
     }
 
     public function compact() :string {
-        $res = "<p class='touite'><b>".$this->touite->nom_auteur." ".$this->touite->prenom_auteur."</b><br>".$this->TexttoTag($this->touite->texte)." 
+        $txt = $this->touite->texte;
+        if (strlen($txt) > 50) {
+            $txt = substr($txt,0,50);
+            $txt = $txt."...";
+        }
+        $res = "<p class='touite'><b>".$this->touite->nom_auteur." ".$this->touite->prenom_auteur."</b><br>".$this->TexttoTag($txt)." 
         <a class=\"voirPlus\" href=\"index.php?action=show_touite&id=".$this->touite->id_touite."\"> voir plus </a></p><br>";
         return $res;
     }
 
     public function TexttoTag(string $texte) : string {
         $tags = Touite::getTags($texte);
-        $txt = $this->touite->texte;
         foreach($tags as $index => $value) {
             $id = Touite::getTagId($value);
             $taglien[$index] = "<a href=\"index.php?action=list_touite_tag&id=".$id."\">
             ".$value." </a>";
         }
-        $mots = explode(" ",$txt);
+        $mots = explode(" ",$texte);
         foreach($mots as $indexMots => $valueMots) {
             foreach($tags as $indexTags => $valueTags)  {
                 if ($valueMots === $valueTags) {
@@ -46,7 +50,7 @@ class RenderTouite implements Renderer {
     public function long() :string  {
         $touite = "";
         $noteTouite = $this->touite->noteTouite();
-        $touite .="<p>Score: ".$noteTouite."</p>";
+        $touite .="<p>Like : ".$noteTouite."</p>";
         $suivreUtilisateur = "";
         if (isset($_SESSION["user"])) {
             $u = unserialize($_SESSION["user"]);
@@ -64,8 +68,6 @@ class RenderTouite implements Renderer {
 
             }
             $noteUtilisateur = Utilisateur::verifierAvis($this->touite->id_touite);
-
-            $touite.="</br>";
             if($noteUtilisateur !== 0){
                 if($noteUtilisateur > 0){  //Utilisateur a liké
                     $touite .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
