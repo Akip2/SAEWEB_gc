@@ -34,14 +34,12 @@ class RenderListe implements Renderer {
                 $page->ajouterTouite($array[$i]);
             }
             $id = "";
+            $action = "";
             if(isset($_GET["id"])) {
                 $id = "id=".$_GET["id"]."&";
             }
             if (isset($_GET["action"])) {
                 $action = "action=".$_GET["action"]."&";
-            }
-            else{
-                $action = "";
             }
             $pageprec = $pvalue -1;
             $pagesuiv = $pvalue +1;

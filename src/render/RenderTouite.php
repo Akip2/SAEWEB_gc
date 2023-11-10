@@ -19,8 +19,8 @@ class RenderTouite implements Renderer {
 
     public function compact() :string {
         $txt = $this->touite->texte;
-        if (strlen($txt) > 50) {
-            $txt = substr($txt,0,50);
+        if (strlen($txt) > 40) {
+            $txt = substr($txt,0,40);
             $txt = $txt."...";
         }
         $res = "<p class='touite'><b>".$this->touite->nom_auteur." ".$this->touite->prenom_auteur."</b><br>".$this->TexttoTag($txt)." 
@@ -67,22 +67,44 @@ class RenderTouite implements Renderer {
                 }
 
             }
+            if(isset($_POST["like"])){
+                Utilisateur::ajouterAvis(intval($_GET["id"]),1);
+                header("Refresh:0");
+            }
+            if(isset($_POST["dislike"])){
+                Utilisateur::ajouterAvis(intval($_GET["id"]),-1);
+                header("Refresh:0");
+            }
+            if (isset($_POST["prefRemover"])) {  //REMOVE DISLIKE OU REMOVE LIKE
+                Utilisateur::ajouterAvis(intval($_GET["id"]),0);
+                header("Refresh:0");
+            }
+
+            $id = "";
+            $action = "";
+            if(isset($_GET["id"])) {
+                $id = "id=".$_GET["id"];
+            }
+            if (isset($_GET["action"])) {
+                $action = "action=".$_GET["action"]."&";
+            }
+
             $noteUtilisateur = Utilisateur::verifierAvis($this->touite->id_touite);
             if($noteUtilisateur !== 0){
                 if($noteUtilisateur > 0){  //Utilisateur a liké
-                    $touite .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
-                    <input type='submit' class='bouton' id='prefRemover' name='removeLike' value='Retirer like'>
+                    $touite .= "<form id=\"noter\" method=\"POST\" action=\"?$action$id\"/>
+                    <input type='submit' class='bouton' id='prefRemover' name='prefRemover' value='Retirer like'>
                     <input type='submit' class='bouton' id='dislike' name='dislike' value='Dislike'>
                     </form>";
                 }else{  //Utilisateur a disliké
-                    $touite .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
+                    $touite .= "<form id=\"noter\" method=\"POST\" action=\"?$action$id\"/>
                     <input type='submit' class='bouton' id='like' name='like' value='Like'>
-                    <input type='submit' class='bouton' id='prefRemover' name='removeDislike' value='Retirer dislike'>
+                    <input type='submit' class='bouton' id='prefRemover' name='prefRemover' value='Retirer dislike'>
                     </form>";
 
                 }  
             }else{
-                $touite .= "<form id=\"noter\" method=\"POST\" action=\"?action=noter&idTouite={$this->touite->id_touite}\"/>
+                $touite .= "<form id=\"noter\" method=\"POST\" action=\"?$action$id\"/>
                             <input type='submit' class='bouton' id='like' name='like' value='Like'>
                             <input type='submit' class='bouton' id='dislike' name='dislike' value='Dislike'>
                             </form>";

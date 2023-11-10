@@ -11,6 +11,12 @@
 - Antoine Fontanez (Pseudo git : Akip2)
 - Robin Slimani (Pseudo git : RobinSlimani & RobinSlimani)
 
+
+## Présentation de l'application
+
+Notre application Touiter propose à un utilisateur non connecté à un compte de pouvoir consulter l'entièreté des touites présent sur la plateforme. Il peut aussi s'inscrire ou se connecter à un compte. Une fois connecté l'utilisateur peut publier un touite (avec une image ou non), voir son profil, suivre des tags (déjà publiés au préalables), voir tous les touites présent sur la plartforme ou se déconnecter. Un utilisateur peut cliquer sur "voir plus" pour afficher le touite dans son intégralité, de plus il peut cliquer sur le nom de l'utilisateur pour afficher les touites de l'utilisateur, suivre l'utilisateur, liker ou disliker le touite. 
+
+
 ### Fonctionnalités réalisées 
 
 #### Fonctionnalités pour les utilisateurs
@@ -46,13 +52,9 @@
 - CSS : Antoine, Luc
 - Logo : Robin
 
-## Données pour le fonctionnement de l'application
+## Données pour le fonctionnement de l'application 
 ### Compte utilisateur
 -
 -
 ### Compte administrateur
 -
-
-## Présentation de l'application
-
-Notre application Touiter propose à un utilisateur non connecté à un compte de pouvoir consulter l'entièreté des touites présent sur la plateforme. Il peut aussi s'inscrire ou se connecter à un compte. Une fois connecté l'utilisateur peut publier un touite, 
