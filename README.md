@@ -54,7 +54,11 @@ Notre application Touiter propose à un utilisateur non connecté à un compte d
 
 ## Données pour le fonctionnement de l'application 
 ### Compte utilisateur
--
--
+- email : user1@example.com      mot de pass : 1234
+- john.doe@gmail.com       mot de pass : john15
+- alice_smith@yahoo.com       mot de pass : AéZe5f
+- test_user@hotmail.com       mot de pass : test
+- random_user@domain.com       mot de pass : 123456789
+
 ### Compte administrateur
--
+- email : admin@root.com      mot de pass : root
