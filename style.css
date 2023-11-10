@@ -79,15 +79,17 @@ div{
 
 	text-decoration: none;
 
-	background-color: blue;
+	background-color: rgb(53,100,255);
 	border-radius:5%;
 	color:#ffffff;
 }
 
+.menu a:hover{
+	background-color: rgb(83,120,255);
+}
 
-.menu a:hover, .bouton:hover, button:hover, .voirPlus:hover{
-	background-color: rgb(50,50,255);
-
+.bouton:hover, button:hover, .voirPlus:hover{
+background-color: rgb(53,100,255);
 }
 
 #header{
@@ -107,7 +109,7 @@ div{
 }
 
 #header div{
-	background-color: blue;
+	background-color: rgb(53,100,255);
 
 	min-width: 100%;
 
@@ -211,7 +213,7 @@ div{
 
 
 .bouton, button{
-	background-color: blue;
+	background-color: rgb(53,100,255);
 	border-radius:42px;
 	display:inline-block;
 	cursor:pointer;
