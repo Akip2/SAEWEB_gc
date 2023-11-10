@@ -26,17 +26,30 @@ class InscriptionAction extends Action{
 			$prenom = filter_var($_POST['prenom'], FILTER_SANITIZE_SPECIAL_CHARS);
 			$mdp1 = filter_var($_POST['mdp1'], FILTER_SANITIZE_SPECIAL_CHARS);
 			$mdp2 = filter_var($_POST['mdp2'], FILTER_SANITIZE_SPECIAL_CHARS);	
-			if(($mdp1 === $mdp2) && (strlen($mdp1) >= 4)){
-				try{
-					Auth::register($nom, $prenom, $mail, $mdp1);
-					$page = "<h2 style=\"text-align:center;margin-top: 5%;\">Inscription réussie !</h1>";
+			
+			//test d'admissibilté du mdp
+			$length = (strlen($mdp1) >= 8); // longueur minimale
+			$chiffre = preg_match("#[\d]#", $mdp1); // au moins un chiffre
+			$special = preg_match("#[\W]#", $mdp1); // au moins un car. spécial
+			$lower = preg_match("#[a-z]#", $mdp1); // au moins une minuscule
+			$upper = preg_match("#[A-Z]#", $mdp1); // au moins une majuscule
+
+			if($length && $chiffre && $special && $lower && $upper){
+				if(($mdp1 === $mdp2)){
+					try{
+						Auth::register($nom, $prenom, $mail, $mdp1);
+						$page = "<h2 style=\"text-align:center;margin-top: 5%;\">Inscription réussie !</h1>";
+					}
+					catch(AuthException $e){
+						$page = "<h2 style=\"text-align:center;margin-top: 5%;\">L'inscription a échoué, l'email est déjà utilisé</h1>";
+					}
 				}
-				catch(AuthException $e){
-					$page = "<h2 style=\"text-align:center;margin-top: 5%;\">L'inscription a échoué, l'email est déjà utilisé</h1>";
+				else{
+					$page = "<h2 style=\"text-align:center;margin-top: 5%;\">Les mots de passes sont différents</h2>";
 				}
 			}
 			else{
-				$page = "<h2 style=\"text-align:center;margin-top: 5%;\">Les mots de passes sont différents et/ou trop courts</h2>";
+				$page = "<h2 style=\"text-align:center;margin-top: 5%;\">Veuillez entrer un mot de passe plus sécurisé</h2>";
 			}
 		}
 		return $page;
