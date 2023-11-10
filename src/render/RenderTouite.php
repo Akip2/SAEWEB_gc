@@ -54,15 +54,33 @@ class RenderTouite implements Renderer {
         $suivreUtilisateur = "";
         if (isset($_SESSION["user"])) {
             $u = unserialize($_SESSION["user"]);
+
+            if(isset($_POST["suivre"])) {
+                if (intval($_GET['suivre']) === 0){
+                    Utilisateur::suivreUtilisateur($_GET['idUtilisateur']);
+                }else{
+                    Utilisateur::nePlusSuivreUtilisateur($_GET['idUtilisateur']);
+                }
+            }
+
+            $id = "";
+            $action = "";
+            if(isset($_GET["id"])) {
+                $id = "id=".$_GET["id"];
+            }
+            if(isset($_GET["action"])) {
+                $action = "action=".$_GET["action"];
+            }
+
             if ($this->touite->nom_auteur === $u->nom && $this->touite->prenom_auteur === $u->prenom){
                 $touite .= "<a href=\"?action=sup_touite&idTouite=".$this->touite->id_touite."\"> <input class=\"bouton\" type=\"button\" value=\"Supprimer Touite\"> </a>";
             }else{
 
                 if (Utilisateur::verifierSuivi($this->touite->id_auteur)){
-                    $suivreUtilisateur = "<a href=\"?action=suivre&idUtilisateur=".$this->touite->id_auteur."&suivre=1\"> 
+                    $suivreUtilisateur = "<a href=\"?$action&$id&idUtilisateur=".$this->touite->id_auteur."&suivre=1\"> 
                     <input class=\"bouton\" type=\"button\" value=\"Ne plus suivre\"> </a>";
                 }else{
-                    $suivreUtilisateur = "<a href=\"?action=suivre&idUtilisateur=".$this->touite->id_auteur."&suivre=0\"> 
+                    $suivreUtilisateur = "<a href=\"?$action&$id&idUtilisateur=".$this->touite->id_auteur."&suivre=0\"> 
                     <input class=\"bouton\" type=\"button\" value=\"Suivre\"> </a>";
                 }
 
@@ -79,32 +97,22 @@ class RenderTouite implements Renderer {
                 Utilisateur::ajouterAvis(intval($_GET["id"]),0);
                 header("Refresh:0");
             }
-
-            $id = "";
-            $action = "";
-            if(isset($_GET["id"])) {
-                $id = "id=".$_GET["id"];
-            }
-            if (isset($_GET["action"])) {
-                $action = "action=".$_GET["action"]."&";
-            }
-
             $noteUtilisateur = Utilisateur::verifierAvis($this->touite->id_touite);
             if($noteUtilisateur !== 0){
                 if($noteUtilisateur > 0){  //Utilisateur a liké
-                    $touite .= "<form id=\"noter\" method=\"POST\" action=\"?$action$id\"/>
+                    $touite .= "<form id=\"noter\" method=\"POST\" action=\"?$action&$id\"/>
                     <input type='submit' class='bouton' id='prefRemover' name='prefRemover' value='Retirer like'>
                     <input type='submit' class='bouton' id='dislike' name='dislike' value='Dislike'>
                     </form>";
                 }else{  //Utilisateur a disliké
-                    $touite .= "<form id=\"noter\" method=\"POST\" action=\"?$action$id\"/>
+                    $touite .= "<form id=\"noter\" method=\"POST\" action=\"?$action&$id\"/>
                     <input type='submit' class='bouton' id='like' name='like' value='Like'>
                     <input type='submit' class='bouton' id='prefRemover' name='prefRemover' value='Retirer dislike'>
                     </form>";
 
                 }  
             }else{
-                $touite .= "<form id=\"noter\" method=\"POST\" action=\"?$action$id\"/>
+                $touite .= "<form id=\"noter\" method=\"POST\" action=\"?$action&$id\"/>
                             <input type='submit' class='bouton' id='like' name='like' value='Like'>
                             <input type='submit' class='bouton' id='dislike' name='dislike' value='Dislike'>
                             </form>";
