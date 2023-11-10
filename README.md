@@ -46,7 +46,7 @@
 - CSS : Antoine, Luc
 - Logo : Robin
 
-## Données pour le fonctionnement de l'application
+## Données pour le fonctionnement de l'application 
 ### Compte utilisateur
 -
 -
@@ -55,4 +55,11 @@
 
 ## Présentation de l'application
 
-Notre application Touiter propose à un utilisateur non connecté à un compte de pouvoir consulter l'entièreté des touites présent sur la plateforme. Il peut aussi s'inscrire ou se connecter à un compte. Une fois connecté l'utilisateur peut publier un touite, 
+Notre application Touiter propose à un utilisateur non connecté à un compte de pouvoir consulter l'entièreté des touites présent sur la plateforme. Il peut aussi s'inscrire ou se connecter à un compte. Une fois connecté l'utilisateur peut publier un touite (avec une image ou non), voir son profil, suivre des tags (déjà publiés au préalables), voir tous les touites présent sur la plartforme ou se déconnecter. Un utilisateur peut cliquer sur "voir plus" pour afficher le touite dans son intégralité, de plus il peut cliquer sur le nom de l'utilisateur pour afficher les touites de l'utilisateur, suivre l'utilisateur, liker ou disliker le touite. 
+
+## Présentation du code
+
+### Action
+
+#### Classe Action
+La classe **Action** est une classe abstraite qui possède trois attributs protégé : http_method (qui stocke le type de requête qui appelle l'action), hostname (pour le nom de l'host) et script_name (pour le nom du script). Le constructeur de la classe initialise tous les attributs avec le tableau _$_SERVER_. La seule méthode de la classe est la méthode _execute()_ qui renvoie un string qui contient le code **html** nécessaire à l'action ou résultat de l'action.
