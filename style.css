@@ -4,6 +4,8 @@ body{
 	padding: 5px;
 	background-color: white;
 	font-family: sans-serif;
+
+	margin-top: 10%;
 }
 
 div{
@@ -89,10 +91,53 @@ div{
 }
 
 #header{
-	background-color: blue;
-	width: 100%;
+	border-width: 5%;
+
+	margin-top: 1%;
+	display: flex;
+	flex-direction: row;
+
+	width:100%;
+	align-items: stretch;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
 }
 
+#header div{
+	background-color: blue;
+
+	min-width: 100%;
+
+	width: 100%;
+
+	height:10%;
+
+	padding-bottom: 1.25%;
+	padding-top: 1.25%;
+
+	margin-top: -1%;
+
+	border:solid darkblue;
+}
+
+#header img{
+	width:10%;
+	height: 10%;
+
+	background-color: rgb(144, 238, 85);
+	margin-top: -1%;
+
+	border:solid darkgreen;
+
+}
+
+#header h1{
+	margin-left: 5%;
+	font-size: 225%;
+}
 
 .touite:hover{
 	background-color: rgb(200,200,200);
