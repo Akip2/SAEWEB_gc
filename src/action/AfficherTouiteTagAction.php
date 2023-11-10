@@ -7,7 +7,15 @@ use iutnc\touiter\utilisateur\Utilisateur;
 
 class AfficherTouiteTagAction extends Action{
 	public function execute() : string{
-        $menu=RenderMenu::render();
+        $menu;
+        if(isset($_SESSION["user"])){
+            $menu=RenderMenu::render();
+        }
+        else{
+            $menu="<br><a href=\"index.php?action=inscription\">Inscription</a>
+            <a href=\"index.php?action=connexion\">Connexion</a>";
+        }
+
 
         $id = $_GET["id"];
         $user = new Utilisateur($id);
