@@ -141,7 +141,12 @@ class Touite{
             try {
                 $st->execute();
             } catch (PDOException) {
-                
+                $st=$bd->prepare("
+                Delete FROM touite2tag where id_touite = ? and id_tag=?;
+            ");
+
+            $st->bindParam(1, $id_touite);
+            $st->bindParam(2, $id_tag);
             }
         }
 
@@ -181,7 +186,7 @@ class Touite{
         return $tags;
     }
 
-    public static function getTagId(string $tag) : int {
+    public static function getTagId(string $tag) : int|null {
         $bd=Connection\ConnectionFactory::makeConnection();
         
         $st=$bd->prepare("SELECT id FROM tag WHERE libelle = ?;");
@@ -192,7 +197,6 @@ class Touite{
 
         $data=$st->fetch();
 
-        
         return $data["id"];
         
 

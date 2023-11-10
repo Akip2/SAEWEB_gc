@@ -32,8 +32,11 @@ class RenderTouite implements Renderer {
         $tags = Touite::getTags($texte);
         foreach($tags as $index => $value) {
             $id = Touite::getTagId($value);
-            $taglien[$index] = "<a href=\"index.php?action=list_touite_tag&id=".$id."\">
-            ".$value." </a>";
+            if ($id != null) {
+                $taglien[$index] = "<a href=\"index.php?action=list_touite_tag&id=".$id."\">
+                ".$value." </a>";
+            }
+            echo filter_var("<", FILTER_SANITIZE_SPECIAL_CHARS);
         }
         $mots = explode(" ",$texte);
         foreach($mots as $indexMots => $valueMots) {
