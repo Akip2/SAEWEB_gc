@@ -41,7 +41,7 @@ class PublishTouiteAction extends Action {
         }
         else if($this->http_method==="POST"){
 
-            $texte=filter_var($_POST["texte"], FILTER_DEFAULT);
+            $texte=filter_var($_POST["texte"], FILTER_SANITIZE_SPECIAL_CHARS);
             //date de publication 
             date_default_timezone_set('Europe/Paris');
             $date_publication = date('Y-m-d H:i:s');

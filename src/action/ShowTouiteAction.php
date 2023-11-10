@@ -10,7 +10,14 @@ use iutnc\touiter\render\RenderMenu;
 class ShowTouiteAction extends Action{
 	public function execute() : string{
 
-        $menu = RenderMenu::render();
+        $menu;
+        if(isset($_SESSION["user"])){
+            $menu = RenderMenu::render();
+        }
+        else{
+            $menu="<br><a href=\"index.php?action=inscription\">Inscription</a>
+            <a href=\"index.php?action=connexion\">Connexion</a>";
+        }
 
 		$id = $_GET["id"];
         $t = new Touite($id);
