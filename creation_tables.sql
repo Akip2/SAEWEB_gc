@@ -54,7 +54,7 @@ foreign key(id_suivit) references utilisateur(id)
 );
 
 
-Create Table suivreTag(
+Create Table suivretag(
 id_suiveur int(3) not null,
 id_tag int(3) not null,
 Constraint primary key(id_suiveur,id_tag),
